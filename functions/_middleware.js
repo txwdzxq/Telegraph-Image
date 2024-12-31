@@ -5,10 +5,6 @@ export async function onRequest(context) {
   } = context;
   try {
     console.log(env)
-    if(request.pathname.startsWith('/user_login_request')) {
-      return context.next();
-    }
-
     if (request.headers.has('Authorization')) {
       const {user, pass} = basicAuthentication(context.request);
 
