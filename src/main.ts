@@ -8,6 +8,7 @@ import router from './router'
 const app = createApp(App);
 app.use(LazyLoad, {
   loading: '@/loading.svg',
+  preload: 1.5
 });
 app.use(router);
 app.mount('#app')
