@@ -7,6 +7,7 @@ const {upload} = useRequest()
 const uploadTrigger = ref<HTMLDivElement>();
 const uploadTriggerStatus = ref<HTMLSpanElement>();
 const uploadStatus = ref<HTMLSpanElement>();
+const uploadStatusInterval = ref<HTMLDivElement>();
 const uploadStatusResponse = ref<string[]>();
 const selectedFiles = ref<File[]>([]);
 const isDragging = ref(false);
@@ -42,6 +43,9 @@ const onDrop = (event: DragEvent) => {
     upload(selectedFiles.value).then(
       (res) => {
         uploadStatusResponse.value = res;
+        if (uploadStatusInterval.value) {
+          uploadStatusInterval.value.innerText = '上传成功点击复制';
+        }
       }
     );
     if (uploadTriggerStatus.value) {
@@ -84,15 +88,20 @@ const change = (event: Event) => {
   }
 };
 
+const copyToClipboard = (event: MouseEvent) => {
+  const select_element = event.currentTarget as HTMLDivElement;
+  navigator.clipboard.writeText(select_element.innerText);
+};
+
 </script>
 <template>
   <div ref="effectiveArea" class="effective-area" @dragover.prevent="onDragOver" @dragleave.prevent="onDragLeave"
        @drop.prevent="onDrop" @paste="handlePaste">
     <div ref="uploadTrigger" class="upload-trigger" :class="{ dragging: isDragging}" @click="triggerFileInput">
       <span ref="uploadTriggerStatus" class="upload-trigger-status">点击或拖拽文件上传</span>
-      <div class="upload-status-interval"></div>
+      <div ref="uploadStatusInterval" class="upload-status-interval"></div>
       <div ref="uploadStatus" v-for="uploadStatusText in uploadStatusResponse" :key="uploadStatusText"
-           class="upload-status">
+           class="upload-status" @click="copyToClipboard">
         {{ uploadStatusText }}
       </div>
       <input ref="fileInput" type="file" @change="change" hidden="hidden" multiple>
