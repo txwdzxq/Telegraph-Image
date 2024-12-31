@@ -33,7 +33,7 @@ jobs:
       run: | 
         git config --global user.email "txwdzxq@sina.com" 
         git config --global user.name "txwdzxq" 
-        git clone --single-branch --branch girl-self-use https://user:$GITHUB_TOKEN@github.com/txwdzxq/Telegraph-Image.git deploy
+        git clone --single-branch --branch girl-self-use https://txwdzxq:$GITHUB_TOKEN@github.com/txwdzxq/Telegraph-Image.git deploy
         cd deploy
         cp -r ../dist/* .
         git add .
