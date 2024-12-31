@@ -13,7 +13,7 @@ interface ImgUrlArr {
   name: string
 }
 
-const img_url_arr = ref<ImgUrlArr[]>([{"name": "1"}, {"name": "2"}]);
+const img_url_arr = ref<ImgUrlArr[]>();
 axios.get('/get_image_url')
   .then(
     res => {
