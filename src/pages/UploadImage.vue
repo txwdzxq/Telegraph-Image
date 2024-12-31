@@ -69,6 +69,9 @@ const handlePaste = (event: ClipboardEvent) => {
     console.log(selectedFiles)
     upload(selectedFiles.value).then(
       (res) => {
+        if (uploadStatusInterval.value) {
+          uploadStatusInterval.value.innerText = '上传成功点击复制';
+        }
         uploadStatusResponse.value = res;
       }
     );
@@ -82,6 +85,9 @@ const change = (event: Event) => {
     console.log(selectedFiles)
     upload(selectedFiles.value).then(
       (res) => {
+        if (uploadStatusInterval.value) {
+          uploadStatusInterval.value.innerText = '上传成功点击复制';
+        }
         uploadStatusResponse.value = res;
       }
     );
@@ -106,7 +112,7 @@ const copyToClipboard = (event: MouseEvent) => {
       <span ref="uploadTriggerStatus" class="upload-trigger-status">点击或拖拽文件上传</span>
       <div ref="uploadStatusInterval" class="upload-status-interval"></div>
       <div ref="uploadStatus" v-for="uploadStatusText in uploadStatusResponse" :key="uploadStatusText"
-           class="upload-status" @click="copyToClipboard">
+           class="upload-status" :style="{ color: uploadStatusText === '已复制' ? 'darkred' : 'black'}" @click="copyToClipboard">
         {{ uploadStatusText }}
       </div>
       <input ref="fileInput" type="file" @change="change" hidden="hidden" multiple>
