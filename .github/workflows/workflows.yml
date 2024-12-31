@@ -37,6 +37,7 @@ jobs:
         cd deploy
         cp -r ../dist/* .
         cp -r ../functions .
+        cp ../package.json ../package-lock.json .
         git add .
         git commit -m "update dist content from compiler" 
         git push origin girl-self-use --force
