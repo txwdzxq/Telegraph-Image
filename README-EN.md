@@ -1,5 +1,7 @@
 # Telegraph-Image
 
+typescript practice rewrite girls self-use version, more bug, functional less,such as the need for normal use, please move to the [original](https://github.com/cf-pages/Telegraph-Image)
+
 Free Image Hosting solution, Flickr/imgur alternative. Using Cloudflare Pages and Telegraph.
 
 English|[中文](readme-zh.md)
