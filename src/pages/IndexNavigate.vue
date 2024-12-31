@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {RouterLink} from "vue-router";
+
 const logoutTrigger = () => {
   window.location.href = '/logout_request'
 }
@@ -17,20 +18,24 @@ const logoutTrigger = () => {
 </template>
 
 <style scoped>
-.index-navigate{
+.index-navigate {
   display: flex;
   height: 5vh;
+  min-height: 60px;
   text-align: center;
   justify-items: center;
   font-size: xx-large;
 }
-.navigate-item{
+
+.navigate-item {
   margin: auto;
 }
-.logout{
+
+.logout {
   margin-left: 0;
 }
-span{
+
+span {
   padding: 0 20px 0 20px;
 }
 </style>
