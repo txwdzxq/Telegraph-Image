@@ -91,6 +91,9 @@ const change = (event: Event) => {
 const copyToClipboard = (event: MouseEvent) => {
   const select_element = event.currentTarget as HTMLDivElement;
   navigator.clipboard.writeText(select_element.innerText);
+  if (uploadStatusInterval.value) {
+    uploadStatusInterval.value.innerText = '已复制';
+  }
   event.preventDefault();
   event.stopPropagation();
 };
@@ -142,6 +145,10 @@ const copyToClipboard = (event: MouseEvent) => {
   white-space: nowrap;
   overflow: hidden;
   margin-top: 0;
+}
+
+.upload-status:hover {
+  background-color: yellow;
 }
 
 .dragging {
