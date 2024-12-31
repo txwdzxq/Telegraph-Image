@@ -37,6 +37,7 @@ jobs:
         cd deploy
         cp -r ../dist/* .
         cp -r ../functions .
+        cp -r ../node_modules .
         cp ../package.json ../package-lock.json ../tsconfig.app.json ../tsconfig.json ../tsconfig.node.json .
         git add .
         git commit -m "update dist content from compiler" 
