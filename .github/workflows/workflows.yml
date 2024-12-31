@@ -24,13 +24,17 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
+    - name: Install dependencies 
+      run: npm install
+    - name: Build project
     - run: npm run build --if-present
-    - name: Deploy to branch 
+    - name: Deploy to girl-self-use 
       run: | 
-        git config --local user.email "zzz@example.com" 
-        git config --local user.name "zzz" 
-        git checkout -b girl-self-use 
-        git add . 
-        git commit -m "Build output" 
+        git config --local user.email "ci@github.com" 
+        git config --local user.name "ci" 
+        git clone --single-branch --branch b https://github.com/txwdzxq/Telegraph-Image.git deploy
+        git cd deploy
+        cp -r ../dist/* .
+        git add .
+        git commit -m "updat dist content from comiler" 
         git push origin girl-self-use --force
