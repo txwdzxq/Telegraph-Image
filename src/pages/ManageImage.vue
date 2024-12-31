@@ -20,21 +20,21 @@ axios.get('/get_image_url')
   .then(
     res => {
       img_res_store.value = res.data;
-      for (; img_res_index < 9; img_res_index++) {
+      console.log('res', res.data)
+      for (let i = 0; i < 9; i++ , img_res_index++) {
         if (img_res_store.value && img_res_store.value[img_res_index] === undefined) {
           img_url_arr.value?.push(img_res_store.value[img_res_index]);
         } else {
           break;
         }
       }
-      console.log('res', res.data)
     }
   ).catch(e => console.log(e))
 
 // 触底加载
 window.addEventListener('scroll', () => {
   if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-    for (; img_res_index < 9; img_res_index++) {
+    for (let i = 0; i < 9; i++ , img_res_index++) {
       if (img_res_store.value && img_res_store.value[img_res_index] === undefined) {
         img_url_arr.value?.push(img_res_store.value[img_res_index]);
       } else {
