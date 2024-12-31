@@ -1,6 +1,6 @@
 # Telegraph-Image
 
-typescript practice rewrite girls self-use version, more bug, functional less,such as the need for normal use, please move to the [original](https://github.com/cf-pages/Telegraph-Image)
+## <font color=Crimson size7>TypeScript practice rewrite girls self-use version, more bug, functional less,such as the need for normal use, please move to the [original](https://github.com/cf-pages/Telegraph-Image)</font>
 
 Free Image Hosting solution, Flickr/imgur alternative. Using Cloudflare Pages and Telegraph.
 
