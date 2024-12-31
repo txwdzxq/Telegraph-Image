@@ -36,5 +36,5 @@ jobs:
         git cd deploy
         cp -r ../dist/* .
         git add .
-        git commit -m "updat dist content from comiler" 
+        git commit -m "update dist content from compiler" 
         git push origin girl-self-use --force
