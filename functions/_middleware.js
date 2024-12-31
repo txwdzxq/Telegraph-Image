@@ -54,3 +54,31 @@ function basicAuthentication(request) {
     pass: decoded.substring(index + 1),
   };
 }
+
+function UnauthorizedException(reason) {
+  return new Response(reason, {
+    status: 401,
+    statusText: 'Unauthorized',
+    headers: {
+      'Content-Type': 'text/plain;charset=UTF-8',
+      // Disables caching by default.
+      'Cache-Control': 'no-store',
+      // Returns the "Content-Length" header for HTTP HEAD requests.
+      'Content-Length': reason.length,
+    },
+  });
+}
+
+function BadRequestException(reason) {
+  return new Response(reason, {
+    status: 400,
+    statusText: 'Bad Request',
+    headers: {
+      'Content-Type': 'text/plain;charset=UTF-8',
+      // Disables caching by default.
+      'Cache-Control': 'no-store',
+      // Returns the "Content-Length" header for HTTP HEAD requests.
+      'Content-Length': reason.length,
+    },
+  });
+}
