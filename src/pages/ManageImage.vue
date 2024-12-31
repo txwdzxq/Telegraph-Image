@@ -13,22 +13,43 @@ interface ImgUrlArr {
   name: string
 }
 
+const img_res_store = ref<ImgUrlArr[]>();
+let img_res_index = 0;
 const img_url_arr = ref<ImgUrlArr[]>();
 axios.get('/get_image_url')
   .then(
     res => {
-      img_url_arr.value = res.data
+      img_res_store.value = res.data;
+      for (; img_res_index < 9; img_res_index++) {
+        if (img_res_store.value && img_res_store.value[img_res_index] === undefined) {
+          img_url_arr.value?.push(img_res_store.value[img_res_index]);
+        } else {
+          break;
+        }
+      }
       console.log('res', res.data)
     }
   ).catch(e => console.log(e))
 
+// 触底加载
+window.addEventListener('scroll', () => {
+  if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+    for (; img_res_index < 9; img_res_index++) {
+      if (img_res_store.value && img_res_store.value[img_res_index] === undefined) {
+        img_url_arr.value?.push(img_res_store.value[img_res_index]);
+      } else {
+        break;
+      }
+    }
+  }
+});
 </script>
 
 <template>
   <div ref="manage">manage</div>
   <div class="show_img">
     <div v-for="item in img_url_arr" :key="item.name">
-      <img v-lazy="'../file/'+item.name" alt="">
+      <img :src="'../file/'+item.name" alt="">
     </div>
   </div>
 </template>
