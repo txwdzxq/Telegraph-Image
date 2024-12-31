@@ -3,16 +3,10 @@ import {ref} from 'vue';
 import axios from "axios";
 
 const manage = ref<HTMLDivElement>();
-axios.get('/user_login_request').then(
-  res => {
-    console.log('res', res)
-  }
-).catch(e => console.log(e))
 
 interface ImgUrlArr {
   name: string;
 }
-
 const img_res_store = ref<ImgUrlArr[]>();
 let img_res_index = 0;
 const img_url_arr = ref<ImgUrlArr[]>([]);
@@ -20,18 +14,13 @@ axios.get('/get_image_url')
   .then(
     res => {
       img_res_store.value = res.data;
-      console.log('res', res.data)
       for (let i = 0; i < 9; i++ , img_res_index++) {
-        console.log(img_res_store.value && img_res_store.value[img_res_index] !== undefined)
         if (img_res_store.value && img_res_store.value[img_res_index] !== undefined) {
           img_url_arr.value?.push(img_res_store.value[img_res_index]);
         } else {
           break;
         }
       }
-      console.log(img_res_index)
-      console.log(img_res_store.value)
-      console.log(img_url_arr.value)
     }
   ).catch(e => console.log(e))
 
