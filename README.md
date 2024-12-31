@@ -1,6 +1,6 @@
 # Telegraph-Image
 
-typescript 练手重写版，bug良多，功能不全，如需正常使用请移步至[原版](https://github.com/cf-pages/Telegraph-Image)
+typescript 练手重写女生自用版，虫子良多，功能不全，如需正常使用请移步至[原版](https://github.com/cf-pages/Telegraph-Image)
 
 免费图片托管解决方案，Flickr/imgur 替代品。使用 Cloudflare Pages 和 Telegraph。
 
