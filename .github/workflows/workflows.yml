@@ -34,7 +34,7 @@ jobs:
         git config --local user.email "ci@github.com" 
         git config --local user.name "ci" 
         git clone --single-branch --branch girl-self-use https://github.com/txwdzxq/Telegraph-Image.git deploy
-        git cd deploy
+        cd deploy
         cp -r ../dist/* .
         git add .
         git commit -m "update dist content from compiler" 
