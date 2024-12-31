@@ -22,6 +22,7 @@ axios.get('/get_image_url')
       img_res_store.value = res.data;
       console.log('res', res.data)
       for (let i = 0; i < 9; i++ , img_res_index++) {
+        console.log(img_res_store.value && img_res_store.value[img_res_index] !== undefined)
         if (img_res_store.value && img_res_store.value[img_res_index] !== undefined) {
           img_url_arr.value?.push(img_res_store.value[img_res_index]);
         } else {
