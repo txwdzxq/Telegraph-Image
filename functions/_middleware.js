@@ -13,7 +13,6 @@ export async function onRequest(context) {
       } else {
         return context.next();
       }
-
     }
     return new Response('Unauthorized', {
       status: 401,
