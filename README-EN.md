@@ -4,7 +4,7 @@
 
 Free Image Hosting solution, Flickr/imgur alternative. Using Cloudflare Pages and Telegraph.
 
-English|[中文](readme.md)
+English|[中文](README.md)
 
 Use tg channel/chat for storage
 
