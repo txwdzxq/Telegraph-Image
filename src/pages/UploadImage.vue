@@ -91,6 +91,8 @@ const change = (event: Event) => {
 const copyToClipboard = (event: MouseEvent) => {
   const select_element = event.currentTarget as HTMLDivElement;
   navigator.clipboard.writeText(select_element.innerText);
+  event.preventDefault();
+  event.stopPropagation();
 };
 
 </script>
