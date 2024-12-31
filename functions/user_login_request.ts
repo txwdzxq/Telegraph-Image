@@ -19,5 +19,5 @@ export const onRequest: PagesFunction<Env> = async (context) => {
     });
   }
 
-  return new Response('success', {headers: {'Cache-Control': 'private, max-age=600', 'Expires': ''}});
+  return new Response('success', {headers: {'Cache-Control': 'private, max-age=2', 'Expires': ''}});
 };
