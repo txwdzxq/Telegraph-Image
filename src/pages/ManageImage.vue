@@ -10,7 +10,7 @@ axios.get('/user_login_request').then(
 ).catch(e => console.log(e))
 
 interface ImgUrlArr {
-  name: string
+  name: string;
 }
 
 const img_res_store = ref<ImgUrlArr[]>();
@@ -22,12 +22,15 @@ axios.get('/get_image_url')
       img_res_store.value = res.data;
       console.log('res', res.data)
       for (let i = 0; i < 9; i++ , img_res_index++) {
-        if (img_res_store.value && img_res_store.value[img_res_index] != undefined) {
+        if (img_res_store.value && img_res_store.value[img_res_index] !== undefined) {
           img_url_arr.value?.push(img_res_store.value[img_res_index]);
         } else {
           break;
         }
       }
+      console.log(img_res_index)
+      console.log(img_res_store.value)
+      console.log(img_url_arr.value)
     }
   ).catch(e => console.log(e))
 
@@ -35,7 +38,7 @@ axios.get('/get_image_url')
 window.addEventListener('scroll', () => {
   if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
     for (let i = 0; i < 9; i++ , img_res_index++) {
-      if (img_res_store.value && img_res_store.value[img_res_index] != undefined) {
+      if (img_res_store.value && img_res_store.value[img_res_index] !== undefined) {
         img_url_arr.value?.push(img_res_store.value[img_res_index]);
       } else {
         break;
