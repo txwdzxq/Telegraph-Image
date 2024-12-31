@@ -12,7 +12,6 @@ export const onRequest = async () => {
     '    <p>您将在 <span id="countdown">3.000</span> 秒后跳转到首页</p>\n' +
     '\n' +
     '    <script>\n' +
-    '        document.cookie = "authToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";\n' +
     '        let milliseconds = 3000;\n' +
     '        const countdownElement = document.getElementById(\'countdown\');\n' +
     '\n' +
