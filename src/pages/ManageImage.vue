@@ -15,7 +15,7 @@ interface ImgUrlArr {
 
 const img_res_store = ref<ImgUrlArr[]>();
 let img_res_index = 0;
-const img_url_arr = ref<ImgUrlArr[]>();
+const img_url_arr = ref<ImgUrlArr[]>([]);
 axios.get('/get_image_url')
   .then(
     res => {
