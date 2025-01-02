@@ -33,7 +33,7 @@ function load_on_end(msg: string) {
       if (img_res_store.value && img_res_store.value[img_res_index] !== undefined) {
         const scrollPosition = window.scrollY;
         img_url_arr.value?.push(img_res_store.value[img_res_index]);
-        nextTick(()=>{
+        nextTick(() => {
           window.scrollTo(0, scrollPosition);
         })
       } else {
@@ -55,7 +55,7 @@ function throttle(func: () => void, wait: number) {
   }
 }
 
-window.addEventListener('scroll', throttle(() => load_on_end('end'), 3000));
+window.addEventListener('scroll', throttle(() => load_on_end('load pic'), 3000));
 
 function copyImageUrl(img_path: string) {
   window.navigator.clipboard.writeText(window.location.origin + '/file/get/' + img_path);
@@ -90,7 +90,9 @@ function deleteImage(event: MouseEvent, img_path: string) {
       <img :src="window_location_origin +'/file/get/'+item.name" alt="" @click="copyImageUrl(item.name)">
     </div>
   </div>
-  <div v-if="img_res_store && img_res_store[img_res_index] !== undefined" class="bottom-div"></div>
+  <transition name="fade">
+    <div v-if="img_res_store && img_res_store[img_res_index] !== undefined" class="bottom-div"></div>
+  </transition>
   <div v-if="img_res_store && img_res_store[img_res_index] == undefined" class="bottom-loaded-div">已全部加载</div>
 </template>
 
@@ -156,7 +158,23 @@ img {
   text-align: center;
 }
 
-.bottom-loaded-div{
+.fade-enter-active {
+  transition: 1s;
+}
+
+.fade-leave-active {
+  transition: 1s;
+}
+
+.fade-enter-from {
+  height: 99vh;
+}
+
+.fade-leave-to {
+  height: 1vh;
+}
+
+.bottom-loaded-div {
   text-align: center;
 }
 
