@@ -66,7 +66,7 @@ function deleteImage(index: number, img_path: string) {
 
   axios.delete('/file/delete/' + img_path)
     .then(res => {
-        img_res_store.value?.splice(index, 1);
+        img_url_arr.value?.splice(index, 1);
         console.log(res);
       }
     )
