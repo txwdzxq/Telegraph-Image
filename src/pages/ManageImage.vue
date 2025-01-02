@@ -91,7 +91,8 @@ function deleteImage(event: MouseEvent, img_path: string) {
       <img :src="window_location_origin +'/file/get/'+item.name" alt="" @click="copyImageUrl(item.name)">
     </div>
   </div>
-  <div v-if="img_res_store && img_res_store[img_res_index] !== undefined" class="bottom-div">Scroll down for more</div>
+  <div v-if="img_res_store && img_res_store[img_res_index] !== undefined" class="bottom-div"></div>
+  <div v-if="img_res_store && img_res_store[img_res_index] == undefined">已全部加载</div>
 </template>
 
 <style scoped>
