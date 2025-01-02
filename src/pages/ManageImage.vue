@@ -62,21 +62,18 @@ function copyImageUrl(img_path: string) {
 }
 
 function deleteImage(event: MouseEvent, img_path: string) {
-  console.log('Image deleted', img_path, event.currentTarget);
+  console.log('Image deleted', img_path);
   const currentElement = event.currentTarget as HTMLDivElement;
   const wrapDeleteButtonLine = currentElement.parentElement as HTMLDivElement;
   const imageContainer = wrapDeleteButtonLine.parentElement as HTMLDivElement;
-  imageContainer.remove();
-//   axios.delete('/file/delete/' + img_path)
-//     .then(res => {
-//         const currentElement = event.currentTarget as HTMLDivElement;
-//         const wrapDeleteButtonLine = currentElement.parentElement as HTMLDivElement;
-//         const imageContainer = wrapDeleteButtonLine.parentElement as HTMLDivElement;
-//         imageContainer.remove()
-//         console.log(res);
-//       }
-//     )
-//     .catch(e => console.log(e));
+
+  axios.delete('/file/delete/' + img_path)
+    .then(res => {
+        imageContainer.remove();
+        console.log(res);
+      }
+    )
+    .catch(e => console.log(e));
 }
 
 </script>
