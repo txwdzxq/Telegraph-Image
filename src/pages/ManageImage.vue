@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref} from 'vue';
+import {nextTick, ref} from 'vue';
 import axios from "axios";
 
 const clue = ref<HTMLDivElement>();
@@ -31,7 +31,11 @@ function load_on_end(msg: string) {
   if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
     for (let i = 0; i < 9; i++ , img_res_index++) {
       if (img_res_store.value && img_res_store.value[img_res_index] !== undefined) {
+        const scrollPosition = window.scrollY;
         img_url_arr.value?.push(img_res_store.value[img_res_index]);
+        nextTick(()=>{
+          window.scrollTo(0, scrollPosition);
+        })
       } else {
         break;
       }
@@ -51,20 +55,25 @@ function throttle(func: () => void, wait: number) {
   }
 }
 
-window.addEventListener('scroll', throttle(()=>load_on_end('end'), 3000));
+window.addEventListener('scroll', throttle(() => load_on_end('end'), 3000));
 
 function copyImageUrl(img_path: string) {
   window.navigator.clipboard.writeText(window.location.origin + '/file/get/' + img_path);
 }
 
-function deleteImage(img_path: string) {
+function deleteImage(event: MouseEvent, img_path: string) {
   console.log('Image deleted');
   axios.delete('/file/delete/' + img_path)
     .then(res => {
+        const currentElement = event.currentTarget as HTMLDivElement;
+        const wrapDeleteButtonLine = currentElement.parentElement as HTMLDivElement;
+        const imageContainer = wrapDeleteButtonLine.parentElement as HTMLDivElement;
+        imageContainer.remove()
         console.log(res);
       }
     )
     .catch(e => console.log(e));
+
 }
 
 </script>
@@ -75,13 +84,14 @@ function deleteImage(img_path: string) {
     <div class="image-container" v-for="item in img_url_arr" :key="item.name">
       <div class="wrap-delete-button-line">
         <div class="wrap-delete-button-neighbors"></div>
-        <div class="wrap-delete-button" @click="deleteImage(item.name)">
+        <div class="wrap-delete-button" @click="deleteImage($event,item.name)">
           <button class="delete-button">删除</button>
         </div>
       </div>
       <img :src="window_location_origin +'/file/get/'+item.name" alt="" @click="copyImageUrl(item.name)">
     </div>
   </div>
+  <div v-if="img_res_store && img_res_store[img_res_index] !== undefined" class="bottom-div">Scroll down for more</div>
 </template>
 
 <style scoped>
@@ -139,6 +149,14 @@ img {
   border: none;
   padding: 5px;
   opacity: 0;
+}
+
+.bottom-div {
+  height: 100vh; /* 确保页面有足够的高度进行滚动 */
+  background-color: lightcoral;
+  margin-top: 20px;
+  text-align: center;
+  padding: 10px;
 }
 
 </style>
