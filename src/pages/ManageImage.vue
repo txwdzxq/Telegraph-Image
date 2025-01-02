@@ -78,15 +78,17 @@ function deleteImage(index: number, img_path: string) {
 <template>
   <div ref="clue" class="clue">点击图片复制地址</div>
   <div class="show_img_div">
-    <div class="image-container" v-for="(item,index) in img_url_arr" :key="item.name">
-      <div class="wrap-delete-button-line">
-        <div class="wrap-delete-button-neighbors"></div>
-        <div class="wrap-delete-button" @click="deleteImage(index,item.name)">
-          <button class="delete-button">删除</button>
+    <transition-group name="fade-image-container">
+      <div class="image-container" v-for="(item,index) in img_url_arr" :key="item.name">
+        <div class="wrap-delete-button-line">
+          <div class="wrap-delete-button-neighbors"></div>
+          <div class="wrap-delete-button" @click="deleteImage(index,item.name)">
+            <button class="delete-button">删除</button>
+          </div>
         </div>
+        <img :src="window_location_origin +'/file/get/'+item.name" alt="" @click="copyImageUrl(item.name)">
       </div>
-      <img :src="window_location_origin +'/file/get/'+item.name" alt="" @click="copyImageUrl(item.name)">
-    </div>
+      <transition-group name="fade-image-container">
   </div>
   <transition name="fade-bottom-div">
     <div v-if="img_res_store && img_res_store[img_res_index] !== undefined" class="bottom-div"></div>
