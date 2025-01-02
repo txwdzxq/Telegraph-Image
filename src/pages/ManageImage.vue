@@ -88,7 +88,7 @@ function deleteImage(index: number, img_path: string) {
         </div>
         <img :src="window_location_origin +'/file/get/'+item.name" alt="" @click="copyImageUrl(item.name)">
       </div>
-      <transition-group name="fade-image-container">
+      </transition-group>
   </div>
   <transition name="fade-bottom-div">
     <div v-if="img_res_store && img_res_store[img_res_index] !== undefined" class="bottom-div"></div>
