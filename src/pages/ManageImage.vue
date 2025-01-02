@@ -55,7 +55,7 @@ function throttle(func: () => void, wait: number) {
   }
 }
 
-window.addEventListener('scroll', throttle(() => load_on_end('load pic'), 3000));
+window.addEventListener('scroll', throttle(() => load_on_end('load pic'), 2000));
 
 function copyImageUrl(img_path: string) {
   window.navigator.clipboard.writeText(window.location.origin + '/file/get/' + img_path);
