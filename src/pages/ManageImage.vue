@@ -26,7 +26,8 @@ axios.get('/file/list')
   ).catch(e => console.log(e))
 
 // 触底加载
-window.addEventListener('scroll', () => {
+function load_on_end(msg: string) {
+  console.log(msg);
   if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
     for (let i = 0; i < 9; i++ , img_res_index++) {
       if (img_res_store.value && img_res_store.value[img_res_index] !== undefined) {
@@ -36,7 +37,21 @@ window.addEventListener('scroll', () => {
       }
     }
   }
-});
+}
+
+function throttle(func: () => void, wait: number) {
+  let timer: NodeJS.Timeout | null = null;
+  return function () {
+    if (!timer) {
+      timer = setTimeout(() => {
+        func();
+        timer = null;
+      }, wait)
+    }
+  }
+}
+
+window.addEventListener('scroll', throttle(()=>load_on_end('end'), 3000));
 
 function copyImageUrl(img_path: string) {
   window.navigator.clipboard.writeText(window.location.origin + '/file/get/' + img_path);

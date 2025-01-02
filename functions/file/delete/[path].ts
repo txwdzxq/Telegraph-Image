@@ -6,7 +6,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
   const {request, env,} = context;
 
   const url = new URL(request.url);
-  const url_split = url.pathname.split(".")[0].split("/");
+  const url_split = url.pathname.split("/");
   const path = url_split[url_split.length - 1];
 
   let res_data: ArrayBuffer | string;
