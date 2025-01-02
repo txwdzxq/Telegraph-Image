@@ -37,7 +37,6 @@ function load_on_end(msg: string) {
           window.scrollTo(0, scrollPosition);
         })
       } else {
-        console.log('img_res_index', img_res_index, img_res_store.value && img_res_store.value[img_res_index.value] !== undefined,img_res_store.value);
         return;
       }
     }
@@ -92,9 +91,7 @@ function deleteImage(event: MouseEvent, img_path: string) {
     </div>
   </div>
   <transition name="fade">
-    <div v-if="img_res_store && img_res_store[img_res_index] !== undefined" class="bottom-div">
-      {{img_res_store[img_res_index].name}}
-    </div>
+    <div v-if="img_res_store && img_res_store[img_res_index] !== undefined" class="bottom-div"></div>
   </transition>
   <div v-if="img_res_store && img_res_store[img_res_index] == undefined" class="bottom-loaded-div">已全部加载</div>
 </template>
