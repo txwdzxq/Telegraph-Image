@@ -42,7 +42,7 @@ window.addEventListener('scroll', () => {
   <div ref="manage">manage</div>
   <div class="show_img">
     <div v-for="item in img_url_arr" :key="item.name">
-      <img :src="'../file/'+item.name" alt="">
+      <img :src="'../file/get/'+item.name" alt="">
     </div>
   </div>
 </template>
