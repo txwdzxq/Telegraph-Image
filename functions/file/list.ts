@@ -19,5 +19,4 @@ export const onRequest: PagesFunction<Env> = async (context) => {
   const img_url_keys = JSON.stringify((await img_url_list).keys);
   console.log(img_url_keys)
   return new Response(img_url_keys);
-  // return new Response(JSON.stringify([{"name": "4"},{"name": "5"}]));
 };

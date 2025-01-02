@@ -10,7 +10,7 @@ interface ImgUrlArr {
 const img_res_store = ref<ImgUrlArr[]>();
 let img_res_index = 0;
 const img_url_arr = ref<ImgUrlArr[]>([]);
-axios.get('/get_image_url')
+axios.get('/file/list')
   .then(
     res => {
       img_res_store.value = res.data;
