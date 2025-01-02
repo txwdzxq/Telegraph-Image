@@ -19,7 +19,7 @@ axios.get('/file/list')
         if (img_res_store.value && img_res_store.value[img_res_index] !== undefined) {
           img_url_arr.value?.push(img_res_store.value[img_res_index]);
         } else {
-          break;
+          return;
         }
       }
     }
@@ -37,7 +37,7 @@ function load_on_end(msg: string) {
           window.scrollTo(0, scrollPosition);
         })
       } else {
-        break;
+        return;
       }
     }
   }
@@ -73,7 +73,6 @@ function deleteImage(event: MouseEvent, img_path: string) {
       }
     )
     .catch(e => console.log(e));
-
 }
 
 </script>
@@ -92,7 +91,7 @@ function deleteImage(event: MouseEvent, img_path: string) {
     </div>
   </div>
   <div v-if="img_res_store && img_res_store[img_res_index] !== undefined" class="bottom-div"></div>
-  <div v-if="img_res_store && img_res_store[img_res_index] == undefined">已全部加载</div>
+  <div v-if="img_res_store && img_res_store[img_res_index] == undefined" class="bottom-loaded-div">已全部加载</div>
 </template>
 
 <style scoped>
@@ -154,6 +153,10 @@ img {
 
 .bottom-div {
   height: 100vh; /* 确保页面有足够的高度进行滚动 */
+  text-align: center;
+}
+
+.bottom-loaded-div{
   text-align: center;
 }
 
