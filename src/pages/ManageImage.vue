@@ -127,7 +127,7 @@ img {
 
 .fade-image-container-enter-from {
   opacity: 1;
-  transform: translateX(0);
+  transform: translateY(0);
 }
 
 .fade-enter-active {
@@ -135,7 +135,7 @@ img {
 }
 
 .fade-image-container-leave-to {
-  transform: translateX(20px);
+  transform: translateY(20px);
   opacity: 0;
 }
 
