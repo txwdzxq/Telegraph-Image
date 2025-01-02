@@ -37,7 +37,7 @@ function load_on_end(msg: string) {
           window.scrollTo(0, scrollPosition);
         })
       } else {
-        console.log('img_res_index', img_res_index, img_res_store.value && img_res_store.value[img_res_index] !== undefined);
+        console.log('img_res_index', img_res_index, img_res_store.value && img_res_store.value[img_res_index] !== undefined,img_res_store.value);
         return;
       }
     }
