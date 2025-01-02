@@ -92,7 +92,9 @@ function deleteImage(event: MouseEvent, img_path: string) {
     </div>
   </div>
   <transition name="fade">
-    <div v-if="img_res_store && img_res_store[img_res_index] !== undefined" class="bottom-div"></div>
+    <div v-if="img_res_store && img_res_store[img_res_index] !== undefined" class="bottom-div">
+      {{img_res_store[img_res_index].name}}
+    </div>
   </transition>
   <div v-if="img_res_store && img_res_store[img_res_index] == undefined" class="bottom-loaded-div">已全部加载</div>
 </template>
