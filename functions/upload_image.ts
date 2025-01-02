@@ -42,7 +42,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
       const img_kv_key = res_file_id + '.' + file_extension;
       await env.img_url.put(img_kv_key, '',{});
 
-      res_data.push("/file/get/" + img_kv_key);
+      res_data.push(img_kv_key);
     }
   } catch (e) {
     res_data.push(e.toString());
