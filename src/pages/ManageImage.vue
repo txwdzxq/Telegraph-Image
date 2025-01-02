@@ -28,7 +28,7 @@ axios.get('/file/list')
 // 触底加载
 function load_on_end(msg: string) {
   console.log(msg);
-  if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+  if (window.innerHeight + window.scrollY >= document.body.offsetHeight * 0.8) {
     for (let i = 0; i < 9; i++ , img_res_index++) {
       if (img_res_store.value && img_res_store.value[img_res_index] !== undefined) {
         const scrollPosition = window.scrollY;
@@ -153,10 +153,7 @@ img {
 
 .bottom-div {
   height: 100vh; /* 确保页面有足够的高度进行滚动 */
-  background-color: lightcoral;
-  margin-top: 20px;
   text-align: center;
-  padding: 10px;
 }
 
 </style>
