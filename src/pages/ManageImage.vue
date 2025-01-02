@@ -68,7 +68,23 @@ function deleteImage(index: number, img_path: string) {
     .then(res => {
         img_url_arr.value?.splice(index, 1);
         if (img_res_store.value && img_res_store.value[++img_res_index.value] !== undefined) {
-          img_url_arr.value?.push(img_res_store.value[img_res_index.value]);
+          let add = 0;
+          if (img_res_store.value.length % 3 === 0) {
+            add = 3;
+          }
+          if (img_res_store.value.length % 3 === 1) {
+            add = 2;
+          }
+          if (img_res_store.value.length % 3 === 2) {
+            add = 1;
+          }
+          for (let i = 0; i < add; i++ , img_res_index.value++) {
+            if (img_res_store.value[img_res_index.value] !== undefined) {
+              img_url_arr.value?.push(img_res_store.value[img_res_index.value]);
+            } else {
+              return;
+            }
+          }
         }
         console.log(res);
       }
