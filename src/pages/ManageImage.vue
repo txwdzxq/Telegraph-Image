@@ -61,15 +61,12 @@ function copyImageUrl(img_path: string) {
   window.navigator.clipboard.writeText(window.location.origin + '/file/get/' + img_path);
 }
 
-function deleteImage(event: MouseEvent, img_path: string) {
+function deleteImage(index: number, img_path: string) {
   console.log('Image deleted', img_path);
-  const currentElement = event.currentTarget as HTMLDivElement;
-  const wrapDeleteButtonLine = currentElement.parentElement as HTMLDivElement;
-  const imageContainer = wrapDeleteButtonLine.parentElement as HTMLDivElement;
 
   axios.delete('/file/delete/' + img_path)
     .then(res => {
-        imageContainer.remove();
+        img_res_store.value?.splice(index, 1);
         console.log(res);
       }
     )
@@ -81,17 +78,17 @@ function deleteImage(event: MouseEvent, img_path: string) {
 <template>
   <div ref="clue" class="clue">点击图片复制地址</div>
   <div class="show_img_div">
-    <div class="image-container" v-for="item in img_url_arr" :key="item.name">
+    <div class="image-container" v-for="(item,index) in img_url_arr" :key="item.name">
       <div class="wrap-delete-button-line">
         <div class="wrap-delete-button-neighbors"></div>
-        <div class="wrap-delete-button" @click="deleteImage($event,item.name)">
+        <div class="wrap-delete-button" @click="deleteImage(index,item.name)">
           <button class="delete-button">删除</button>
         </div>
       </div>
       <img :src="window_location_origin +'/file/get/'+item.name" alt="" @click="copyImageUrl(item.name)">
     </div>
   </div>
-  <transition name="fade">
+  <transition name="fade-bottom-div">
     <div v-if="img_res_store && img_res_store[img_res_index] !== undefined" class="bottom-div"></div>
   </transition>
   <div v-if="img_res_store && img_res_store[img_res_index] == undefined" class="bottom-loaded-div">已全部加载</div>
@@ -116,6 +113,28 @@ img {
 
 .image-container {
   position: relative;
+}
+
+.fade-image-container-enter-active {
+  transition: 1s;
+}
+
+.fade-image-container-leave-active {
+  transition: 1s;
+}
+
+.fade-image-container-enter-from {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fade-enter-active {
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.fade-image-container-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
 }
 
 .image-container:hover .delete-button {
