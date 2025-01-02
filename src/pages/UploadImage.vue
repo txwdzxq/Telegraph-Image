@@ -12,6 +12,7 @@ const uploadStatusResponse = ref<string[]>();
 const selectedFiles = ref<File[]>([]);
 const isDragging = ref(false);
 const fileInput = ref<HTMLInputElement | null>(null);
+const window_location_origin = ref<string>(window.location.origin)
 
 
 const triggerFileInput = () => {
@@ -40,7 +41,7 @@ const onDrop = (event: DragEvent) => {
   if (event.dataTransfer && event.dataTransfer.files) {
     selectedFiles.value = Array.from(event.dataTransfer.files);
     console.log(selectedFiles)
-    upload(selectedFiles.value).then(
+    upload(window.location.origin, selectedFiles.value).then(
       (res) => {
         uploadStatusResponse.value = res;
         if (uploadStatusInterval.value) {
@@ -67,7 +68,7 @@ const handlePaste = (event: ClipboardEvent) => {
       }
     }
     console.log(selectedFiles)
-    upload(selectedFiles.value).then(
+    upload(window.location.origin, selectedFiles.value).then(
       (res) => {
         if (uploadStatusInterval.value) {
           uploadStatusInterval.value.innerText = '上传成功点击复制';
@@ -83,7 +84,7 @@ const change = (event: Event) => {
   if (target.files) {
     selectedFiles.value = Array.from(target.files);
     console.log(selectedFiles)
-    upload(selectedFiles.value).then(
+    upload(window.location.origin, selectedFiles.value).then(
       (res) => {
         if (uploadStatusInterval.value) {
           uploadStatusInterval.value.innerText = '上传成功点击复制';
@@ -112,8 +113,9 @@ const copyToClipboard = (event: MouseEvent) => {
       <span ref="uploadTriggerStatus" class="upload-trigger-status">点击或拖拽文件上传</span>
       <div ref="uploadStatusInterval" class="upload-status-interval"></div>
       <div ref="uploadStatus" v-for="uploadStatusText in uploadStatusResponse" :key="uploadStatusText"
-           class="upload-status" :style="{ color: uploadStatusText === '已复制' ? 'darkred' : 'black'}" @click="copyToClipboard">
-        {{ uploadStatusText }}
+           class="upload-status" :style="{ color: uploadStatusText === '已复制' ? 'darkred' : 'black'}"
+           @click="copyToClipboard">
+        {{ window_location_origin + '/file/get/' + uploadStatusText }}
       </div>
       <input ref="fileInput" type="file" @change="change" hidden="hidden" multiple>
     </div>
