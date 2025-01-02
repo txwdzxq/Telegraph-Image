@@ -40,7 +40,7 @@ const onDrop = (event: DragEvent) => {
   isDragging.value = false;
   if (event.dataTransfer && event.dataTransfer.files) {
     selectedFiles.value = Array.from(event.dataTransfer.files);
-    console.log(selectedFiles)
+    // console.log(selectedFiles)
     upload(window.location.origin, selectedFiles.value).then(
       (res) => {
         uploadStatusResponse.value = res;
@@ -67,7 +67,7 @@ const handlePaste = (event: ClipboardEvent) => {
         }
       }
     }
-    console.log(selectedFiles)
+    // console.log(selectedFiles)
     upload(window.location.origin, selectedFiles.value).then(
       (res) => {
         if (uploadStatusInterval.value) {
@@ -83,7 +83,7 @@ const change = (event: Event) => {
   const target = event.target as HTMLInputElement;
   if (target.files) {
     selectedFiles.value = Array.from(target.files);
-    console.log(selectedFiles)
+    // console.log(selectedFiles)
     upload(window.location.origin, selectedFiles.value).then(
       (res) => {
         if (uploadStatusInterval.value) {
