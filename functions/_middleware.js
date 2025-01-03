@@ -6,7 +6,7 @@ export async function onRequest(context) {
   } = context;
   try {
     if (request.url === '/logout_request') {
-      return next();
+      return new Response(request.url, {status: 200});
     }
 
     if (request.headers.has('Authorization')) {
