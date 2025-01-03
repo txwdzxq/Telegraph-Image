@@ -7,6 +7,11 @@ export const onRequest = async () => {
     '    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n' +
     '    <title>Logout</title>\n' +
     '</head>\n' +
+    '<style>\n' +
+    '    body {\n' +
+    '        text-align: center;\n' +
+    '    }\n'+
+    '</style>\n'+
     '<body>\n' +
     '    <h1>页面即将跳转</h1>\n' +
     '    <p>您将在 <span id="countdown">3.000</span> 秒后跳转到首页</p>\n' +
