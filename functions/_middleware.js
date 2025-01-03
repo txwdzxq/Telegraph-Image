@@ -2,16 +2,20 @@ export async function onRequest(context) {
   const {
     request,
     env,
+    next,
   } = context;
   try {
-    console.log(env)
-    if (request.headers.has('Authorization')) {
-      const {user, pass} = basicAuthentication(context.request);
+    if (request.url === '/logout_request') {
+      return next();
+    }
 
-      if (context.env['BASIC_USER'] !== user || context.env['BASIC_PASS'] !== pass) {
+    if (request.headers.has('Authorization')) {
+      const {user, pass} = basicAuthentication(request);
+
+      if (env['BASIC_USER'] !== user || env['BASIC_PASS'] !== pass) {
         return UnauthorizedException('Invalid credentials.');
       } else {
-        return context.next();
+        return next();
       }
     }
     return new Response('Unauthorized', {
