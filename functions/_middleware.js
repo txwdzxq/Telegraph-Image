@@ -7,7 +7,7 @@ export async function onRequest(context) {
   try {
     const request_url_split = request.url.split('/');
     if (request_url_split[request_url_split.length - 1] === 'logout_request') {
-      next();
+      return next();
     }
 
     if (request.headers.has('Authorization')) {
