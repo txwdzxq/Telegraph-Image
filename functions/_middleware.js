@@ -5,8 +5,10 @@ export async function onRequest(context) {
     next,
   } = context;
   try {
-
-    return new Response([request.url, request.headers,request.method,request.original], {status: 200});
+    const request_url_split = request.url.split('/');
+    if (request_url_split[request_url_split.length - 1] === 'logout_request') {
+      return new Response([request.url, JSON.stringify(context)], {status: 200});
+    }
 
     if (request.headers.has('Authorization')) {
       const {user, pass} = basicAuthentication(request);
