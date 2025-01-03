@@ -5,7 +5,7 @@ export async function onRequest(context) {
     next,
   } = context;
   try {
-    return new Response(request.path, {status: 200});
+    return new Response(request.fullPath, {status: 200});
 
     if (request.headers.has('Authorization')) {
       const {user, pass} = basicAuthentication(request);
