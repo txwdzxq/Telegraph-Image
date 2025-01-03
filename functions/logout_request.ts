@@ -10,8 +10,8 @@ export const onRequest = async () => {
     '<style>\n' +
     '    body {\n' +
     '        text-align: center;\n' +
-    '    }\n' +
-    '</style>\n' +
+    '    }\n'+
+    '</style>\n'+
     '<body>\n' +
     '    <h1>页面即将跳转</h1>\n' +
     '    <p>您将在 <span id="countdown">3.000</span> 秒后跳转到首页</p>\n' +
@@ -32,10 +32,5 @@ export const onRequest = async () => {
     '    </script>\n' +
     '</body>\n' +
     '</html>\n',
-    {
-      headers: {
-        'content-type': 'text/html; charset=utf-8',
-        'WWW-Authenticate':'Basic realm="", charset="UTF-8"'
-      }, status: 401
-    });
+    {headers: {'content-type': 'text/html; charset=utf-8'}, status: 401});
 };
