@@ -5,9 +5,7 @@ export async function onRequest(context) {
     next,
   } = context;
   try {
-    if (request.url === '/logout_request') {
-      return new Response(request.url, {status: 200});
-    }
+    return new Response(request.url, {status: 200});
 
     if (request.headers.has('Authorization')) {
       const {user, pass} = basicAuthentication(request);
