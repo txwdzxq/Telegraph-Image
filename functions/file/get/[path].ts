@@ -31,7 +31,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
   await axios.get(file_url, {responseType: 'arraybuffer'})
     .then(res => {
         res_data_headers = {
-          'Content-Type': 'image/jpeg',
+          'Content-Type': '*',
           'Content-Disposition': 'inline',
         }
         res_data = res.data
