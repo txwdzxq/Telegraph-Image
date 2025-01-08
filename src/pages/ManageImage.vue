@@ -160,7 +160,9 @@ function isVideo(url: string) {
         </div>
         <img v-if="isImage(item.name)" :src="window_location_origin +'/file/get/'+item.name" alt=""
              @click="copyImageUrl($event,item.name)">
-        <video v-if="isVideo(item.name)" :src="window_location_origin +'/file/get/'+item.name"></video>
+        <video v-if="isVideo(item.name)" autoplay muted loop>
+          <source :src="window_location_origin +'/file/get/'+item.name">
+        </video>
       </div>
     </transition-group>
   </div>
@@ -189,6 +191,11 @@ function isVideo(url: string) {
 }
 
 .image-container img {
+  max-width: 100%;
+  height: auto;
+}
+
+.image-container video {
   max-width: 100%;
   height: auto;
 }
