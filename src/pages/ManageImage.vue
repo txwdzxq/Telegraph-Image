@@ -139,7 +139,7 @@ function tips(x: number, y: number, ...msg_arr: string[]) {
 }
 
 function isImage(url: string) {
-  return /\.(jpeg|jpg|png)$/i.test(url);
+  return /\.(jpeg|jpg|png|webp)$/i.test(url);
 }
 
 function isVideo(url: string) {
@@ -160,7 +160,7 @@ function isVideo(url: string) {
         </div>
         <img v-if="isImage(item.name)" :src="window_location_origin +'/file/get/'+item.name" alt=""
              @click="copyImageUrl($event,item.name)">
-        <video v-if="isVideo(item.name)" autoplay muted loop>
+        <video v-if="isVideo(item.name)" autoplay muted loop @click="copyImageUrl($event,item.name)">
           <source :src="window_location_origin +'/file/get/'+item.name">
         </video>
       </div>
