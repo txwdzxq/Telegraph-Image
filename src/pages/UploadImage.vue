@@ -50,7 +50,7 @@ const onDrop = (event: DragEvent) => {
       }
     );
     if (uploadTriggerStatus.value) {
-      uploadTriggerStatus.value.innerText = '点击或拖拽文件上传';
+      uploadTriggerStatus.value.innerText = '上传中';
     }
   }
 };
@@ -76,6 +76,9 @@ const handlePaste = (event: ClipboardEvent) => {
         uploadStatusResponse.value = res;
       }
     );
+    if (uploadTriggerStatus.value) {
+      uploadTriggerStatus.value.innerText = '上传中';
+    }
   }
 };
 
@@ -92,6 +95,9 @@ const change = (event: Event) => {
         uploadStatusResponse.value = res;
       }
     );
+    if (uploadTriggerStatus.value) {
+      uploadTriggerStatus.value.innerText = '上传中';
+    }
   }
 };
 

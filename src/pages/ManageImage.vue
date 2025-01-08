@@ -15,7 +15,7 @@ const img_url_arr = ref<ImgUrlArr[]>([]);
 axios.get('/file/list')
   .then(res => {
       img_res_store.value = res.data;
-      for (let i = 0; i < 9; i++ , img_res_index.value++) {
+      for (let i = 0; i < 24; i++ , img_res_index.value++) {
         if (img_res_store.value && img_res_store.value[img_res_index.value] !== undefined) {
           img_url_arr.value?.push(img_res_store.value[img_res_index.value]);
         } else {
@@ -29,7 +29,7 @@ axios.get('/file/list')
 function load_on_end(msg: string) {
   console.log(msg);
   if (window.innerHeight + window.scrollY >= document.body.offsetHeight * 0.8) {
-    for (let i = 0; i < 9; i++ , img_res_index.value++) {
+    for (let i = 0; i < 16; i++ , img_res_index.value++) {
       if (img_res_store.value && img_res_store.value[img_res_index.value] !== undefined) {
         const scrollPosition = window.scrollY;
         img_url_arr.value?.push(img_res_store.value[img_res_index.value]);
