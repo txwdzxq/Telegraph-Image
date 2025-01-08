@@ -96,10 +96,10 @@ function deleteImage(index: number, img_path: string) {
 
 // 状态提示
 function tips(x: number, y: number, ...msg_arr: string[]) {
-  document.getElementById('tip_msg_div')?.remove()
-  const tip_msg_div = document.createElement('div')
-  tip_msg_div.className = 'tip-msg-div'
-  tip_msg_div.style.position = 'absolute'
+  document.getElementById('tip_msg_div')?.remove();
+  const tip_msg_div = document.createElement('div');
+  tip_msg_div.className = 'tip-msg-div';
+  tip_msg_div.style.position = 'absolute';
   tip_msg_div.style.padding = '10px';
   tip_msg_div.style.fontSize = '36px';
   tip_msg_div.style.backgroundColor = 'grey';
@@ -107,7 +107,7 @@ function tips(x: number, y: number, ...msg_arr: string[]) {
   tip_msg_div.style.display = 'inline-block';
   tip_msg_div.style.userSelect = 'none';
   tip_msg_div.style.pointerEvents = 'none';
-  tip_msg_div.style.transition = 'opacity 2s ease-in, transform 2s linear';
+  tip_msg_div.style.transition = 'opacity 1s ease-in, transform 1s linear';
 
   for (const msg of msg_arr) tip_msg_div.innerText += msg + '\u00A0'
 
@@ -115,21 +115,23 @@ function tips(x: number, y: number, ...msg_arr: string[]) {
   tip_msg_div.style.left = x + 'px';
   document.body.appendChild(tip_msg_div);
 
-  const tip_msg_div_style_left = window.scrollX + x - tip_msg_div.clientWidth / 2
+  const tip_msg_div_style_left = x - tip_msg_div.clientWidth / 2
   if (tip_msg_div_style_left < 0) {
-    tip_msg_div.style.left = '0';
+    tip_msg_div.style.left = window.scrollX + 'px';
+  } else if (tip_msg_div_style_left >= window.innerWidth - tip_msg_div.clientWidth - 20) {
+    tip_msg_div.style.left = window.innerWidth - tip_msg_div.clientWidth - 20 + 'px';
   } else {
     tip_msg_div.style.left = tip_msg_div_style_left + 'px';
   }
-  const tip_msg_div_style_top = window.scrollY + y - tip_msg_div.offsetHeight - 10
+  const tip_msg_div_style_top = y - tip_msg_div.offsetHeight - 10
   if (tip_msg_div_style_top < 0) {
-    tip_msg_div.style.top = '0';
+    tip_msg_div.style.top = window.scrollY + y + 20 + 'px';
   } else {
-    tip_msg_div.style.top = tip_msg_div_style_top + 'px';
+    tip_msg_div.style.top = window.scrollY + tip_msg_div_style_top + 'px';
   }
   setTimeout(function () {
     tip_msg_div.style.opacity = '0'
-  }, 1000)
+  }, 500)
   setTimeout(function () {
     tip_msg_div.remove()
   }, 1500)
@@ -273,7 +275,7 @@ function tips(x: number, y: number, ...msg_arr: string[]) {
   display: inline-block;
   user-select: none;
   pointer-events: none;
-  transition: opacity 2s ease-in, transform 2s linear;
+  transition: opacity 1s ease-in, transform 1s linear;
 }
 
 </style>
