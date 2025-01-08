@@ -47,6 +47,9 @@ const onDrop = (event: DragEvent) => {
         if (uploadStatusInterval.value) {
           uploadStatusInterval.value.innerText = '上传成功点击复制';
         }
+        if (uploadTriggerStatus.value) {
+          uploadTriggerStatus.value.innerText = '点击或拖拽文件上传';
+        }
       }
     );
     if (uploadTriggerStatus.value) {
@@ -70,10 +73,13 @@ const handlePaste = (event: ClipboardEvent) => {
     // console.log(selectedFiles)
     upload(window.location.origin, selectedFiles.value).then(
       (res) => {
+        uploadStatusResponse.value = res;
         if (uploadStatusInterval.value) {
           uploadStatusInterval.value.innerText = '上传成功点击复制';
         }
-        uploadStatusResponse.value = res;
+        if (uploadTriggerStatus.value) {
+          uploadTriggerStatus.value.innerText = '点击或拖拽文件上传';
+        }
       }
     );
     if (uploadTriggerStatus.value) {
@@ -89,10 +95,13 @@ const change = (event: Event) => {
     // console.log(selectedFiles)
     upload(window.location.origin, selectedFiles.value).then(
       (res) => {
+        uploadStatusResponse.value = res;
         if (uploadStatusInterval.value) {
           uploadStatusInterval.value.innerText = '上传成功点击复制';
         }
-        uploadStatusResponse.value = res;
+        if (uploadTriggerStatus.value) {
+          uploadTriggerStatus.value.innerText = '点击或拖拽文件上传';
+        }
       }
     );
     if (uploadTriggerStatus.value) {

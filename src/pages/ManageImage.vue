@@ -128,7 +128,7 @@ function deleteImage(index: number, img_path: string) {
 }
 
 .image-container {
-  position: relative;
+  text-align: center;
 }
 
 .image-container img {
