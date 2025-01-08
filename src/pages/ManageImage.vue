@@ -3,6 +3,7 @@ import {nextTick, ref} from 'vue';
 import axios from "axios";
 
 const clue = ref<HTMLDivElement>();
+const show_img_div = ref<HTMLDivElement>();
 const window_location_origin = ref<string>(window.location.origin)
 
 interface ImgUrlArr {
@@ -99,11 +100,13 @@ function tips(x: number, y: number, ...msg_arr: string[]) {
   const tip_msg_div = document.createElement('div')
   tip_msg_div.id = 'tip_msg_div'
   tip_msg_div.className = 'tip-msg-div'
-  for (const msg of msg_arr) tip_msg_div.innerText += x + '-' + y + msg + '\u00A0'
+  for (const msg of msg_arr) tip_msg_div.innerText += msg + '\u00A0'
 
   tip_msg_div.style.top = y + 'px'
   tip_msg_div.style.left = x + 'px'
-  document.body.appendChild(tip_msg_div)
+  if (show_img_div.value) {
+    show_img_div.value.appendChild(tip_msg_div);
+  }
 
   tip_msg_div.style.left = (x - tip_msg_div.clientWidth / 2) + 'px'
   tip_msg_div.style.top = (y - tip_msg_div.offsetHeight - 10) + 'px'
@@ -119,7 +122,7 @@ function tips(x: number, y: number, ...msg_arr: string[]) {
 
 <template>
   <div ref="clue" class="clue">点击图片复制地址</div>
-  <div class="show_img_div">
+  <div ref="show_img_div" class="show-img-div">
     <transition-group name="fade-image-container">
       <div class="image-container" v-for="(item,index) in img_url_arr" :key="item.name">
         <div class="wrap-delete-button-line">
@@ -144,7 +147,7 @@ function tips(x: number, y: number, ...msg_arr: string[]) {
   font-size: xxx-large;
 }
 
-.show_img_div {
+.show-img-div {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(256px, 1fr));
   gap: 1rem;
