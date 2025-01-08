@@ -129,10 +129,10 @@ function tips(x: number, y: number, ...msg_arr: string[]) {
   }
   setTimeout(function () {
     tip_msg_div.style.opacity = '0'
-  }, 2000)
+  }, 1000)
   setTimeout(function () {
     tip_msg_div.remove()
-  }, 3000)
+  }, 1500)
 }
 
 </script>
