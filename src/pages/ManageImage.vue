@@ -123,17 +123,17 @@ function deleteImage(index: number, img_path: string) {
 
 .show_img_div {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(256px, 1fr));
   gap: 1rem;
-}
-
-img {
-  max-width: 80%;
-  height: auto;
 }
 
 .image-container {
   position: relative;
+}
+
+.image-container img {
+  max-width: 100%;
+  height: auto;
 }
 
 .fade-image-container-enter-active {
