@@ -138,6 +138,13 @@ function tips(x: number, y: number, ...msg_arr: string[]) {
   }, 1500)
 }
 
+function isImage(url: string) {
+  return /\.(jpeg|jpg|png)$/i.test(url);
+}
+
+function isVideo(url: string) {
+  return /\.(gif|mp4)$/i.test(url);
+}
 </script>
 
 <template>
@@ -151,7 +158,9 @@ function tips(x: number, y: number, ...msg_arr: string[]) {
             <button class="delete-button">删除</button>
           </div>
         </div>
-        <img :src="window_location_origin +'/file/get/'+item.name" alt="" @click="copyImageUrl($event,item.name)">
+        <img v-if="isImage(item.name)" :src="window_location_origin +'/file/get/'+item.name" alt=""
+             @click="copyImageUrl($event,item.name)">
+        <video v-if="isVideo(item.name)" :src="window_location_origin +'/file/get/'+item.name"></video>
       </div>
     </transition-group>
   </div>
