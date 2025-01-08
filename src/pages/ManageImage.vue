@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {nextTick, ref, render} from 'vue';
+import {nextTick, ref,} from 'vue';
 import axios from "axios";
 
 const clue = ref<HTMLDivElement>();
@@ -119,13 +119,13 @@ function tips(x: number, y: number, ...msg_arr: string[]) {
   if (tip_msg_div_style_left < 0) {
     tip_msg_div.style.left = '0';
   } else {
-    tip_msg_div.style.left = tip_msg_div_style_left + 'px';
+    tip_msg_div.style.left = window.scrollX + tip_msg_div_style_left + 'px';
   }
   const tip_msg_div_style_top = y - tip_msg_div.offsetHeight - 10
   if (tip_msg_div_style_top < 0) {
     tip_msg_div.style.top = '0';
   } else {
-    tip_msg_div.style.top = (y - tip_msg_div.offsetHeight - 10) + 'px';
+    tip_msg_div.style.top = window.scrollY + tip_msg_div_style_top + 'px';
   }
   setTimeout(function () {
     tip_msg_div.style.opacity = '0'
