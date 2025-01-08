@@ -102,6 +102,7 @@ function tips(x: number, y: number, ...msg_arr: string[]) {
   tip_msg_div.style.position = 'absolute';
   tip_msg_div.style.padding = '10px';
   tip_msg_div.style.fontSize = '36px';
+  tip_msg_div.style.whiteSpace = 'nowrap';
   tip_msg_div.style.backgroundColor = 'grey';
   tip_msg_div.style.borderRadius = '5px';
   tip_msg_div.style.display = 'inline-block';
