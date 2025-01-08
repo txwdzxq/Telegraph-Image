@@ -108,14 +108,24 @@ function tips(x: number, y: number, ...msg_arr: string[]) {
     show_img_div.value.appendChild(tip_msg_div);
   }
 
-  tip_msg_div.style.left = (x - tip_msg_div.clientWidth / 2) + 'px'
-  tip_msg_div.style.top = (y - tip_msg_div.offsetHeight - 10) + 'px'
-  setTimeout(function () {
-    tip_msg_div.style.opacity = '0'
-  }, 2000)
-  setTimeout(function () {
-    tip_msg_div.remove()
-  }, 3000)
+  const tip_msg_div_style_left = x - tip_msg_div.clientWidth / 2
+  if (tip_msg_div_style_left < 0) {
+    tip_msg_div.style.left = '0';
+  } else {
+    tip_msg_div.style.left = tip_msg_div_style_left + 'px';
+  }
+  const tip_msg_div_style_top = y - tip_msg_div.offsetHeight - 10
+  if (tip_msg_div_style_top < 0) {
+    tip_msg_div.style.top = '0';
+  } else {
+    tip_msg_div.style.top = (y - tip_msg_div.offsetHeight - 10) + 'px';
+  }
+  // setTimeout(function () {
+  //   tip_msg_div.style.opacity = '0'
+  // }, 2000)
+  // setTimeout(function () {
+  //   tip_msg_div.remove()
+  // }, 3000)
 }
 
 </script>
