@@ -57,8 +57,9 @@ function throttle(func: () => void, wait: number) {
 
 window.addEventListener('scroll', throttle(() => load_on_end('load pic'), 2000));
 
-function copyImageUrl(img_path: string) {
+function copyImageUrl(event: MouseEvent, img_path: string) {
   window.navigator.clipboard.writeText(window.location.origin + '/file/get/' + img_path);
+  tips(event.clientX, event.clientY, '已复制');
 }
 
 function deleteImage(index: number, img_path: string) {
@@ -92,6 +93,28 @@ function deleteImage(index: number, img_path: string) {
     .catch(e => console.log(e));
 }
 
+// 状态提示
+function tips(x: number, y: number, ...msg_arr: string[]) {
+  document.getElementById('tip_msg_div')?.remove()
+  const tip_msg_div = document.createElement('div')
+  tip_msg_div.id = 'tip_msg_div'
+  tip_msg_div.className = 'tip-msg-div'
+  for (const msg of msg_arr) tip_msg_div.innerText += x + '-' + y + msg + '\u00A0'
+
+  tip_msg_div.style.top = y + 'px'
+  tip_msg_div.style.left = x + 'px'
+  document.body.appendChild(tip_msg_div)
+
+  tip_msg_div.style.left = (x - tip_msg_div.clientWidth / 2) + 'px'
+  tip_msg_div.style.top = (y - tip_msg_div.offsetHeight - 10) + 'px'
+  setTimeout(function () {
+    tip_msg_div.style.opacity = '0'
+  }, 2000)
+  setTimeout(function () {
+    tip_msg_div.remove()
+  }, 3000)
+}
+
 </script>
 
 <template>
@@ -105,7 +128,7 @@ function deleteImage(index: number, img_path: string) {
             <button class="delete-button">删除</button>
           </div>
         </div>
-        <img :src="window_location_origin +'/file/get/'+item.name" alt="" @click="copyImageUrl(item.name)">
+        <img :src="window_location_origin +'/file/get/'+item.name" alt="" @click="copyImageUrl($event,item.name)">
       </div>
     </transition-group>
   </div>
@@ -128,6 +151,8 @@ function deleteImage(index: number, img_path: string) {
 }
 
 .image-container {
+  border: 1px solid #e9bfff;
+  border-radius: 20px;
   text-align: center;
 }
 
@@ -217,6 +242,18 @@ function deleteImage(index: number, img_path: string) {
 
 .bottom-loaded-div {
   text-align: center;
+}
+
+.tip-msg-div {
+  position: absolute;
+  padding: 10px;
+  font-size: 36px;
+  background-color: grey;
+  border-radius: 5px;
+  display: inline-block;
+  user-select: none;
+  pointer-events: none;
+  transition: opacity 2s ease-in, transform 2s linear;
 }
 
 </style>
