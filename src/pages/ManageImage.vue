@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {nextTick, ref} from 'vue';
+import {nextTick, ref, render} from 'vue';
 import axios from "axios";
 
 const clue = ref<HTMLDivElement>();
@@ -98,8 +98,17 @@ function deleteImage(index: number, img_path: string) {
 function tips(x: number, y: number, ...msg_arr: string[]) {
   document.getElementById('tip_msg_div')?.remove()
   const tip_msg_div = document.createElement('div')
-  tip_msg_div.id = 'tip_msg_div'
   tip_msg_div.className = 'tip-msg-div'
+  tip_msg_div.style.position = 'absolute'
+  tip_msg_div.style.padding = '10px';
+  tip_msg_div.style.fontSize = '36px';
+  tip_msg_div.style.backgroundColor = 'grey';
+  tip_msg_div.style.borderRadius = '5px';
+  tip_msg_div.style.display = 'inline-block';
+  tip_msg_div.style.userSelect = 'none';
+  tip_msg_div.style.pointerEvents = 'none';
+  tip_msg_div.style.transition = 'opacity 2s ease-in, transform 2s linear';
+
   for (const msg of msg_arr) tip_msg_div.innerText += msg + '\u00A0'
 
   tip_msg_div.style.top = y + 'px'
