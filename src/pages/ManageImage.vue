@@ -111,11 +111,9 @@ function tips(x: number, y: number, ...msg_arr: string[]) {
 
   for (const msg of msg_arr) tip_msg_div.innerText += msg + '\u00A0'
 
-  tip_msg_div.style.top = y + 'px'
-  tip_msg_div.style.left = x + 'px'
-  if (show_img_div.value) {
-    show_img_div.value.appendChild(tip_msg_div);
-  }
+  tip_msg_div.style.top = y + 'px';
+  tip_msg_div.style.left = x + 'px';
+  document.body.appendChild(tip_msg_div);
 
   const tip_msg_div_style_left = x - tip_msg_div.clientWidth / 2
   if (tip_msg_div_style_left < 0) {
@@ -129,12 +127,12 @@ function tips(x: number, y: number, ...msg_arr: string[]) {
   } else {
     tip_msg_div.style.top = (y - tip_msg_div.offsetHeight - 10) + 'px';
   }
-  // setTimeout(function () {
-  //   tip_msg_div.style.opacity = '0'
-  // }, 2000)
-  // setTimeout(function () {
-  //   tip_msg_div.remove()
-  // }, 3000)
+  setTimeout(function () {
+    tip_msg_div.style.opacity = '0'
+  }, 2000)
+  setTimeout(function () {
+    tip_msg_div.remove()
+  }, 3000)
 }
 
 </script>
