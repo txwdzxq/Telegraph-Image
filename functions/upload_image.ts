@@ -26,10 +26,10 @@ export const onRequest: PagesFunction<Env> = async (context) => {
       // 根据文件类型选择合适的上传方式
       let apiEndpoint: string;
       let file_type = '';
-      if (file['type'].indexOf('image/jpeg') || file['type'].indexOf('image/png') || file['type'].indexOf('image/webp')) {
+      if (file['type'].includes('image/jpeg') || file['type'].includes('image/png') || file['type'].includes('image/webp')) {
         file_type = 'photo';
         apiEndpoint = 'sendPhoto';
-      }else if(file['type'].indexOf('image/gif')) {
+      }else if(file['type'].includes('image/gif')) {
         file_type = 'animation';
         apiEndpoint = 'sendAnimation';
       } else {
