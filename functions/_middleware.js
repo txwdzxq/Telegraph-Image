@@ -6,7 +6,13 @@ export async function onRequest(context) {
   } = context;
   try {
     const request_url_split = request.url.split('/');
+    // logout
     if (request_url_split[request_url_split.length - 1] === 'logout_request') {
+      return next();
+    }
+
+    // file path
+    if(request_url_split.length === 6 && request_url_split[3] === 'file' && request_url_split[4] === 'get') {
       return next();
     }
 
