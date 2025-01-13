@@ -172,9 +172,14 @@ uploadStatusResponse.value = ['123', '123', '123', '123', '123', '123', '123', '
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  /* 针对Firefox */
-  scrollbar-width: auto;
-  scrollbar-color: #888 transparent;
+}
+
+@-moz-document url-prefix() {
+  .upload-status-wrap {
+    /* 针对Firefox */
+    scrollbar-width: auto;
+    scrollbar-color: #888 transparent;
+  }
 }
 
 .upload-status-wrap:hover {
@@ -202,7 +207,6 @@ uploadStatusResponse.value = ['123', '123', '123', '123', '123', '123', '123', '
 .upload-status-wrap::-webkit-scrollbar-thumb:hover {
   /* 悬停时滚动条滑块的颜色 */
   background: #666;
-
 }
 
 .upload-trigger-status {

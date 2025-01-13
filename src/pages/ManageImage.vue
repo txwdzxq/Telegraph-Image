@@ -182,6 +182,42 @@ function isVideo(url: string) {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(256px, 1fr));
   gap: 1rem;
+  overflow: hidden;
+}
+
+@-moz-document url-prefix() {
+  .show-img-div {
+    /* 针对Firefox */
+    scrollbar-width: auto;
+    scrollbar-color: #888 transparent;
+  }
+}
+
+.show-img-div:hover {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.show-img-div::-webkit-scrollbar {
+  /* 设置滚动条的宽度 */
+  width: 10px;
+}
+
+.show-img-div::-webkit-scrollbar-track {
+  /* 设置滚动条轨道背景为透明 */
+  background: transparent;
+}
+
+.show-img-div::-webkit-scrollbar-thumb {
+  /* 设置滑块的颜色 */
+  background: #888;
+  /* 滑块圆角 */
+  border-radius: 6px;
+}
+
+.show-img-div::-webkit-scrollbar-thumb:hover {
+  /* 悬停时滚动条滑块的颜色 */
+  background: #666;
 }
 
 .image-container {
