@@ -120,8 +120,6 @@ const copyToClipboard = (event: MouseEvent) => {
   event.stopPropagation();
 };
 
-uploadStatusResponse.value = ['123', '123', '123', '123', '123', '123', '123', '123'];
-
 </script>
 <template>
   <div ref="effectiveArea" class="effective-area" @dragover.prevent="onDragOver" @dragleave.prevent="onDragLeave"
