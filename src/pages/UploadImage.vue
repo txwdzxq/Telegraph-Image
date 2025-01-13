@@ -140,7 +140,7 @@ const copyToClipboard = (event: MouseEvent) => {
 <style scoped>
 .effective-area {
   display: flex;
-  height: 93vh;
+  flex: 1;
   text-align: center;
   justify-content: center;
   background-color: #cefcec;
