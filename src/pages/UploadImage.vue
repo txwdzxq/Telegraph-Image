@@ -120,6 +120,8 @@ const copyToClipboard = (event: MouseEvent) => {
   event.stopPropagation();
 };
 
+uploadStatusResponse.value = ['123', '123', '123', '123', '123', '123', '123', '123'];
+
 </script>
 <template>
   <div ref="effectiveArea" class="effective-area" @dragover.prevent="onDragOver" @dragleave.prevent="onDragLeave"
@@ -127,10 +129,12 @@ const copyToClipboard = (event: MouseEvent) => {
     <div ref="uploadTrigger" class="upload-trigger" :class="{ dragging: isDragging}" @click="triggerFileInput">
       <span ref="uploadTriggerStatus" class="upload-trigger-status">点击或拖拽文件上传</span>
       <div ref="uploadStatusInterval" class="upload-status-interval"></div>
-      <div ref="uploadStatus" v-for="uploadStatusText in uploadStatusResponse" :key="uploadStatusText"
-           class="upload-status" :style="{ color: uploadStatusText === '已复制' ? 'darkred' : 'black'}"
-           @click="copyToClipboard">
-        {{ window_location_origin + '/file/get/' + uploadStatusText }}
+      <div ref="uploadStatusWrap" class="upload-status-wrap">
+        <div ref="uploadStatus" v-for="uploadStatusText in uploadStatusResponse" :key="uploadStatusText"
+             class="upload-status" :style="{ color: uploadStatusText === '已复制' ? 'darkred' : 'black'}"
+             @click="copyToClipboard">
+          {{ window_location_origin + '/file/get/' + uploadStatusText }}
+        </div>
       </div>
       <input ref="fileInput" type="file" @change="change" hidden="hidden" multiple>
     </div>
@@ -156,17 +160,57 @@ const copyToClipboard = (event: MouseEvent) => {
   background-color: #e9bfff;
 }
 
+.upload-status-interval {
+  display: flex;
+  margin-top: auto;
+  min-height: 2rem;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.upload-status-wrap {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* 针对Firefox */
+  scrollbar-width: auto;
+  scrollbar-color: #888 transparent;
+}
+
+.upload-status-wrap:hover {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.upload-status-wrap::-webkit-scrollbar {
+  /* 设置滚动条的宽度 */
+  width: 10px;
+}
+
+.upload-status-wrap::-webkit-scrollbar-track {
+  /* 设置滚动条轨道背景为透明 */
+  background: transparent;
+}
+
+.upload-status-wrap::-webkit-scrollbar-thumb {
+  /* 设置滑块的颜色 */
+  background: #888;
+  /* 滑块圆角 */
+  border-radius: 6px;
+}
+
+.upload-status-wrap::-webkit-scrollbar-thumb:hover {
+  /* 悬停时滚动条滑块的颜色 */
+  background: #666;
+
+}
+
 .upload-trigger-status {
   order: -1;
 }
 
-.upload-status-interval {
-  margin-top: auto;
-}
-
 .upload-status {
   white-space: nowrap;
-  overflow: hidden;
   margin-top: 0;
 }
 
