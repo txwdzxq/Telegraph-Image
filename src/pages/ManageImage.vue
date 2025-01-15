@@ -229,6 +229,7 @@ function isVideo(url: string) {
 
 .wrap-delete-button-line {
   display: flex;
+  pointer-events: none;
   box-sizing: border-box;
   transform: translate(0%, 100%);
 }
