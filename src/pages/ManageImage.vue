@@ -234,6 +234,7 @@ function isVideo(url: string) {
 }
 
 .wrap-delete-button-neighbors {
+  pointer-events: none;
   flex: 1;
 }
 
