@@ -240,6 +240,7 @@ function isVideo(url: string) {
 }
 
 .wrap-delete-button {
+  pointer-events: auto;
   cursor: pointer;
   box-sizing: border-box;
   width: auto;
