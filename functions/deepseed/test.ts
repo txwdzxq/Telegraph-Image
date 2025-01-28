@@ -18,7 +18,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
       question = {prompt: atob(value)};
     }
   })
-  const response = await env.AI.run('@cf/meta/llama-3-8b-instruct', question);
+  const response = await env.AI.run('@cf/deepseek-ai/deepseek-r1-distill-qwen-32b', question);
   res_data.push({inputs: question, response});
   res_data.push({url:request.url});
 
