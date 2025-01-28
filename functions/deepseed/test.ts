@@ -1,5 +1,9 @@
+import { Ai } from '@cloudflare/ai/dist/sdk.js'
+export interface Env {
+  AI: Ai;
+}
 
-export const onRequest: PagesFunction = async (context) => {
+export const onRequest: PagesFunction<Env> = async (context) => {
   const {
     request,
     env,
