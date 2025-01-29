@@ -15,7 +15,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
   let question: object;
   new URL(request.url).searchParams.forEach((value, key) => {
     if (key === 'q') {
-      question = {prompt: btoa(value)};
+      question = {prompt: decodeURIComponent(atob('55So5Lit5paH5Zue5aSN5oiR'))};
     }
   })
   const response = await env.AI.run('@cf/deepseek-ai/deepseek-r1-distill-qwen-32b', question);
