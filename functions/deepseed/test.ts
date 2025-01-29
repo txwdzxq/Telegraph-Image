@@ -12,7 +12,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
   console.log(typeof request, typeof env, typeof params);
 
   const res_data: object[] = [];
-  let question;
+  let question: object;
   new URL(request.url).searchParams.forEach((value, key) => {
     if (key === 'q') {
       question = {prompt: atob(value)};
