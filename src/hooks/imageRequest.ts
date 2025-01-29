@@ -1,7 +1,7 @@
 import axios from "axios";
 import FormData from "form-data";
 
-export function useRequest() {
+export function imageRequest() {
   const upload = async (url_path: string, files: Array<File>): Promise<string[]> => {
     if (files) {
       // console.log('upload' + files);

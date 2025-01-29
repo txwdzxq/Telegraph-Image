@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import {ref} from 'vue';
-import {useRequest} from "@/hooks/useRequest.ts";
+import {imageRequest} from "@/hooks/imageRequest.ts";
 
-const {upload} = useRequest()
+const {upload} = imageRequest()
 
 const uploadTrigger = ref<HTMLDivElement>();
 const uploadTriggerStatus = ref<HTMLSpanElement>();

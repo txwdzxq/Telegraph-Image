@@ -1,16 +1,31 @@
 <script setup lang="ts">
 import {ref} from 'vue';
+import {aiRequest} from "@/hooks/aiRequest.ts";
 
-const logout = ref<HTMLDivElement>();
+const {query} = aiRequest()
 
-const logoutTrigger = () => {
-  window.location.href = '/logout_request'
+const prompt = ref<HTMLInputElement>();
+const result = ref<HTMLDivElement>();
+const window_location_origin = ref<string>(window.location.origin)
+
+
+const commitPrompt = () => {
+  query(window_location_origin.value+'/deepseed/test', prompt.value?.value)
+    .then(res => {
+      console.log(res)
+      if (result.value) {
+        result.value.innerText = res.join('\n');
+      }
+    })
 }
+
 
 </script>
 
 <template>
-  <button ref="logout" @click="logoutTrigger"><span>Logout</span></button>
+  <input ref="prompt">
+  <div ref="result"></div>
+  <button ref="commit-prompt" @click="commitPrompt">commit</button>
 </template>
 
 <style scoped>
