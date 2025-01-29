@@ -10,7 +10,7 @@ const window_location_origin = ref<string>(window.location.origin)
 
 
 const commitPrompt = () => {
-  query(window_location_origin.value+'/deepseed/test', prompt.value?.value)
+  query(window_location_origin.value, prompt.value?.value)
     .then(res => {
       console.log(res)
       if (result.value) {
