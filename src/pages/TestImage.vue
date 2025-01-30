@@ -33,7 +33,7 @@ const commitPrompt = () => {
   <input ref="prompt">
   <div v-for="dialogue in dialogues" class="question" :class="{even: dialogue.question}" :key="dialogue.id">
     <div v-for="(content,index) in dialogue.content" :key="index">
-      {{ dialogue.content }}
+      {{ content }}
     </div>
   </div>
   <button ref="commit-prompt" @click="commitPrompt">commit</button>
