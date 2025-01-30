@@ -27,7 +27,6 @@ const commitPrompt = () => {
     });
 }
 
-
 </script>
 
 <template>
