@@ -17,11 +17,11 @@ const dialogues = ref<dialogue[]>([]);
 
 const commitPrompt = () => {
   if (prompt.value) {
-    dialogues.value.push({id: new Date().getTime().toString(), question: true, text: prompt.value.value});
+    dialogues.value.unshift({id: new Date().getTime().toString(), question: true, text: prompt.value.value});
   }
   query(window_location_origin.value, prompt.value?.value)
     .then(res => {
-      dialogues.value.push({id: new Date().getTime().toString(), question: false, text: JSON.stringify(res)});
+      dialogues.value.unshift({id: new Date().getTime().toString(), question: false, text: JSON.stringify(res[0].response)});
     });
 }
 
