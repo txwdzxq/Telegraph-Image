@@ -1,8 +1,8 @@
 import axios from "axios";
 
 interface res {
-  inputs: string;
-  response: string;
+  inputs: object;
+  response: object;
 }
 
 export function aiRequest() {
@@ -15,7 +15,7 @@ export function aiRequest() {
         console.log(e)
       }
     }
-    return {inputs: '', response: ''};
+    return {inputs: {}, response: {}};
   };
 
   return {
