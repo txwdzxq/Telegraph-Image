@@ -21,7 +21,7 @@ const commitPrompt = () => {
   }
   query(window_location_origin.value, prompt.value?.value)
     .then(res => {
-      dialogues.value.push({id: new Date().getTime().toString(), question: false, text: JSON.stringify(res[0])});
+      dialogues.value.push({id: new Date().getTime().toString(), question: false, text: JSON.stringify(res)[0]});
     });
 }
 
