@@ -22,7 +22,7 @@ const commitPrompt = () => {
   query(window_location_origin.value, prompt.value?.value)
     .then(res => {
       const response_text = res[0].response.response;
-      const text_arr = response_text.split('\\n');
+      const text_arr = response_text.split('\n');
       dialogues.value.unshift({id: new Date().getTime().toString(), question: false, content: text_arr});
     });
 
