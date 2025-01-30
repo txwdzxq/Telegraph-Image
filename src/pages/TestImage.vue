@@ -25,22 +25,38 @@ const commitPrompt = () => {
       const text_arr = response_text.split('\n');
       dialogues.value.unshift({id: new Date().getTime().toString(), question: false, content: text_arr});
     });
-
 }
 
 </script>
 
 <template>
-  <input ref="prompt">
-  <div v-for="dialogue in dialogues" class="question" :class="{even: dialogue.question}" :key="dialogue.id">
-    <div v-for="(content,index) in dialogue.content" class="cell" :key="index">
-      {{ content }}
+  <div class="deepseek-warp">
+    <div class="dialogues-warp">
+      <div v-for="dialogue in dialogues" class="question" :class="{even: dialogue.question}" :key="dialogue.id">
+        <div v-for="(content,index) in dialogue.content" class="cell" :key="index">
+          {{ content }}
+        </div>
+      </div>
+    </div>
+    <div class="prompt-warp">
+      <input ref="prompt" class="prompt">
+      <button ref="commit-prompt" class="commit-prompt" @click="commitPrompt">commit</button>
     </div>
   </div>
-  <button ref="commit-prompt" @click="commitPrompt">commit</button>
 </template>
 
 <style scoped>
+.deepseek-warp {
+  display: flex;
+  height: 80vh;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.dialogues-warp{
+  display: flex;
+  flex-direction: column;
+}
+
 .question {
   display: flex;
   flex-direction: column;
@@ -52,7 +68,22 @@ const commitPrompt = () => {
   flex-direction: column;
   align-items: flex-end;
 }
-.cell{
+
+.cell {
   display: flex;
+}
+
+.prompt-warp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.prompt {
+  width: 60vw;
+}
+
+.commit-prompt {
+  width: 30vw;
 }
 </style>
