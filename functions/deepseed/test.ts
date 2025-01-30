@@ -1,4 +1,5 @@
-import { Ai } from '@cloudflare/ai/dist/sdk.js'
+import {Ai} from '@cloudflare/ai/dist/sdk.js'
+
 export interface Env {
   AI: Ai;
 }
@@ -19,8 +20,8 @@ export const onRequest: PagesFunction<Env> = async (context) => {
     }
   })
   const response = await env.AI.run('@cf/deepseek-ai/deepseek-r1-distill-qwen-32b', question);
-  res_data.push({inputs: question, response});
-  res_data.push({url:request.url});
+  res_data.push({inputs: question, response: response});
+  // res_data.push({url:request.url});
 
   return new Response(JSON.stringify(res_data),
     {
