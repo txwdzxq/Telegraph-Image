@@ -1,7 +1,12 @@
 import axios from "axios";
 
+interface res {
+  inputs: string;
+  response: string;
+}
+
 export function aiRequest() {
-  const query = async (url_path: string, prompt: string | undefined): Promise<object> => {
+  const query = async (url_path: string, prompt: string | undefined): Promise<res> => {
     if (prompt) {
       try {
         const result = await axios.get(url_path + '/deepseed/test?q=' + btoa(encodeURIComponent(prompt)), {headers: {'Content-Type': 'multipart/form-data'}});
@@ -10,7 +15,7 @@ export function aiRequest() {
         console.log(e)
       }
     }
-    return {};
+    return {inputs: '', response: ''};
   };
 
   return {
