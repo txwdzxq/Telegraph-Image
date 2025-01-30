@@ -19,12 +19,14 @@ const commitPrompt = () => {
   if (prompt.value) {
     dialogues.value.unshift({id: new Date().getTime().toString(), question: true, content: [prompt.value.value]});
   }
-  query(window_location_origin.value, prompt.value?.value)
-    .then(res => {
-      const response_text = JSON.stringify(res[0].response)
-      const text_arr = response_text.split('\\n');
-      dialogues.value.unshift({id: new Date().getTime().toString(), question: false, content: text_arr});
-    });
+  // query(window_location_origin.value, prompt.value?.value)
+  //   .then(res => {
+  //     const response_text = JSON.stringify(res[0].response)
+  //     const text_arr = response_text.split('\\n');
+  //     dialogues.value.unshift({id: new Date().getTime().toString(), question: false, content: text_arr});
+  //   });
+  dialogues.value.unshift({id: new Date().getTime().toString(), question: false, content: ['test','test2']});
+
 }
 
 </script>
@@ -32,7 +34,7 @@ const commitPrompt = () => {
 <template>
   <input ref="prompt">
   <div v-for="dialogue in dialogues" class="question" :class="{even: dialogue.question}" :key="dialogue.id">
-    <div v-for="(content,index) in dialogue.content" :key="index">
+    <div v-for="(content,index) in dialogue.content" class="cell" :key="index">
       {{ content }}
     </div>
   </div>
@@ -48,5 +50,8 @@ const commitPrompt = () => {
 
 .even {
   justify-content: flex-end;
+}
+.cell {
+  display: block; /* 每个单元格显示在新行上 */
 }
 </style>
