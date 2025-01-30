@@ -7,7 +7,7 @@ const {query} = aiRequest()
 interface dialogue {
   id: string;
   question: boolean;
-  text: string;
+  content: string[];
 }
 
 const prompt = ref<HTMLInputElement>();
@@ -17,11 +17,13 @@ const dialogues = ref<dialogue[]>([]);
 
 const commitPrompt = () => {
   if (prompt.value) {
-    dialogues.value.unshift({id: new Date().getTime().toString(), question: true, text: prompt.value.value});
+    dialogues.value.unshift({id: new Date().getTime().toString(), question: true, content: [prompt.value.value]});
   }
   query(window_location_origin.value, prompt.value?.value)
     .then(res => {
-      dialogues.value.unshift({id: new Date().getTime().toString(), question: false, text: JSON.stringify(res[0].response)});
+      const response_text = JSON.stringify(res[0].response)
+      const text_arr = response_text.split('\\n');
+      dialogues.value.unshift({id: new Date().getTime().toString(), question: false, content: text_arr});
     });
 }
 
@@ -31,7 +33,9 @@ const commitPrompt = () => {
 <template>
   <input ref="prompt">
   <div v-for="dialogue in dialogues" class="question" :class="{even: dialogue.question}" :key="dialogue.id">
-    {{ dialogue.text }}
+    <div v-for="(content,index) in dialogue.content" :key="index">
+      {{ dialogue.content }}
+    </div>
   </div>
   <button ref="commit-prompt" @click="commitPrompt">commit</button>
 </template>
