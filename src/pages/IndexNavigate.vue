@@ -12,7 +12,7 @@ const logoutTrigger = () => {
       <div class="spacer"></div>
       <RouterLink to="/"><span>上传图片</span></RouterLink>
       <RouterLink :to="{name: 'manage-image'}"><span>管理图片</span></RouterLink>
-      <RouterLink :to="{name: 'test-image'}"><span>人工智能</span></RouterLink>
+      <RouterLink :to="{name: 'ai-question'}"><span>人工智能</span></RouterLink>
       <div class="spacer"></div>
       <button class="logout" ref="logout" @click="logoutTrigger"><span>Logout</span></button>
     </div>

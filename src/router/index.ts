@@ -1,7 +1,7 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import UploadImage from "@/pages/UploadImage.vue";
 import ManageImage from "@/pages/ManageImage.vue";
-import TestImage from "@/pages/TestImage.vue";
+import AiQuestion from "@/pages/AiQuestion.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -20,9 +20,9 @@ const router = createRouter({
       component: ManageImage
     },
     {
-      path: '/test',
-      name: 'test-image',
-      component: TestImage
+      path: '/ai',
+      name: 'ai-question',
+      component: AiQuestion
     }
   ]
 });
