@@ -29,11 +29,10 @@ const commitMessage = () => {
     });
     query(window_location_origin.value, message_text)
       .then(res => {
-        // const response_text = res[0].response.response;
-        // const text_arr = response_text.split('\n');
+        const response_text = res[0].response.response;
+        const text_arr = response_text.split('\n');
         dialogues.value.pop();
-        // dialogues.value.push({id: new Date().getTime().toString(), question: false, content: text_arr});
-        dialogues.value.push({id: new Date().getTime().toString(), question: false, content: [JSON.stringify(res)]});
+        dialogues.value.push({id: new Date().getTime().toString(), question: false, content: text_arr});
       });
   }
 }
