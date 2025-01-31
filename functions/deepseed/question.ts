@@ -29,9 +29,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
   new URL(request.url).searchParams.forEach((value, key) => {
     if (key === 'q') {
       question = {
-        messages: [{ role: "user", content: "Who is Cloudflare on github?" }],
-        prompt: decodeURIComponent(atob(value)),
-        raw: false,
+        messages: [{role: "user", content: decodeURIComponent(atob(value))}],
       };
     }
   })
