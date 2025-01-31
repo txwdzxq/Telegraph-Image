@@ -7,6 +7,7 @@ const {query} = aiRequest()
 interface dialogue {
   id: string;
   question: boolean;
+  loading?: boolean;
   content: string[];
 }
 
@@ -17,13 +18,20 @@ const dialogues = ref<dialogue[]>([]);
 
 const commitPrompt = () => {
   if (prompt.value) {
-    if(prompt.value.value === '') return
+    if (prompt.value.value === '') return
     dialogues.value.push({id: new Date().getTime().toString(), question: true, content: [prompt.value.value]});
+    dialogues.value.push({
+      id: new Date().getTime().toString(),
+      question: false,
+      loading: true,
+      content: ['']
+    });
 
     query(window_location_origin.value, prompt.value?.value)
       .then(res => {
         const response_text = res[0].response.response;
         const text_arr = response_text.split('\n');
+        dialogues.value.pop();
         dialogues.value.push({id: new Date().getTime().toString(), question: false, content: text_arr});
       });
   }
@@ -35,8 +43,8 @@ const commitPrompt = () => {
   <div class="deepseek-warp">
     <div class="dialogues-warp">
       <div v-for="dialogue in dialogues" class="question" :class="{even: dialogue.question}" :key="dialogue.id">
-        <div v-for="(content,index) in dialogue.content" class="cell" :class="{'even-cell': dialogue.question}"
-             :key="index">
+        <div v-for="(content,index) in dialogue.content" class="cell" :key="index"
+             :class="{'even-cell': dialogue.question,loader: dialogue.loading}">
           {{ content }}
         </div>
       </div>
@@ -102,4 +110,31 @@ const commitPrompt = () => {
   font-size: 32px;
   width: 20vw;
 }
+
+/* Loader样式 */
+.loader {
+  /* 灰色背景 */
+  border: 8px solid #f3f3f3;
+  /* 圆形 */
+  border-radius: 50%;
+  /* 蓝色顶部边框 */
+  border-top: 8px solid #3498db;
+  /* 宽度 */
+  width: 40px;
+  /* 高度 */
+  height: 40px;
+  /* 旋转动画 */
+  animation: spin 2s linear infinite;
+}
+
+/* 旋转动画关键帧 */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 </style>
