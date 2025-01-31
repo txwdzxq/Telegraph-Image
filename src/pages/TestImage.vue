@@ -17,14 +17,16 @@ const dialogues = ref<dialogue[]>([]);
 
 const commitPrompt = () => {
   if (prompt.value) {
+    if(prompt.value.value === '') return
     dialogues.value.unshift({id: new Date().getTime().toString(), question: true, content: [prompt.value.value]});
+
+    query(window_location_origin.value, prompt.value?.value)
+      .then(res => {
+        const response_text = res[0].response.response;
+        const text_arr = response_text.split('\n');
+        dialogues.value.unshift({id: new Date().getTime().toString(), question: false, content: text_arr});
+      });
   }
-  query(window_location_origin.value, prompt.value?.value)
-    .then(res => {
-      const response_text = res[0].response.response;
-      const text_arr = response_text.split('\n');
-      dialogues.value.unshift({id: new Date().getTime().toString(), question: false, content: text_arr});
-    });
 }
 
 </script>
