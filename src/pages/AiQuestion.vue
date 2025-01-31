@@ -51,7 +51,7 @@ const commitMessage = () => {
       </div>
     </div>
     <div class="message-warp">
-      <textarea ref="message" class="message" @keydown.enter.exact.prevent="commitMessage" @keydown.shift.enter="()=>{}"></textarea>
+      <textarea ref="message" class="message" @keydown.enter.exact.prevent="commitMessage"></textarea>
       <button ref="commit-message" class="commit-message" @click="commitMessage">commit</button>
     </div>
   </div>
