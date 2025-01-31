@@ -16,7 +16,8 @@ const window_location_origin = ref<string>(window.location.origin)
 const dialogues = ref<dialogue[]>([]);
 
 
-const commitPrompt = () => {
+const commitPrompt = (event: MouseEvent | KeyboardEvent) => {
+  if (event.shiftKey) return
   if (prompt.value) {
     if (prompt.value.value === '') return
     dialogues.value.push({id: new Date().getTime().toString(), question: true, content: [prompt.value.value]});
@@ -50,7 +51,7 @@ const commitPrompt = () => {
       </div>
     </div>
     <div class="prompt-warp">
-      <input ref="prompt" class="prompt">
+      <textarea ref="prompt" class="prompt" @keyup.enter="commitPrompt"></textarea>
       <button ref="commit-prompt" class="commit-prompt" @click="commitPrompt">commit</button>
     </div>
   </div>
@@ -104,6 +105,7 @@ const commitPrompt = () => {
 .prompt {
   font-size: 32px;
   width: 60vw;
+  resize: none;
 }
 
 .commit-prompt {
