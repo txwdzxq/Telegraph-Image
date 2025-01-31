@@ -15,11 +15,11 @@ const message = ref<HTMLTextAreaElement>();
 const window_location_origin = ref<string>(window.location.origin)
 const dialogues = ref<dialogue[]>([]);
 
-
 const commitMessage = () => {
   if (message.value) {
     if (message.value.value === undefined || message.value.value === '' || message.value.value.trim() === '') return
-    dialogues.value.push({id: new Date().getTime().toString(), question: true, content: [message.value.value]});
+    const message_text = message.value.value;
+    dialogues.value.push({id: new Date().getTime().toString(), question: true, content: [message_text]});
     message.value.value = '';
     dialogues.value.push({
       id: new Date().getTime().toString(),
@@ -27,13 +27,14 @@ const commitMessage = () => {
       loading: true,
       content: ['']
     });
-
-    query(window_location_origin.value, message.value?.value)
+    query(window_location_origin.value, message_text)
       .then(res => {
         const response_text = res[0].response.response;
         const text_arr = response_text.split('\n');
         dialogues.value.pop();
         dialogues.value.push({id: new Date().getTime().toString(), question: false, content: text_arr});
+        console.log(222);
+
       });
   }
 }
