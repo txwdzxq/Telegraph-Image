@@ -5,14 +5,12 @@ export interface Env {
 }
 
 interface parameters {
-  prompt?: prompt;
+  prompt?: string;
+  raw?: boolean;
   message?: messages;
 }
 
-interface prompt {
-  prompt?: string;
-}
-interface messages   {
+interface messages {
   messages?: [];
 }
 
@@ -29,7 +27,10 @@ export const onRequest: PagesFunction<Env> = async (context) => {
   let question: parameters;
   new URL(request.url).searchParams.forEach((value, key) => {
     if (key === 'q') {
-      question = {prompt: {prompt: decodeURIComponent(atob(value))}};
+      question = {
+        prompt: decodeURIComponent(atob(value)),
+        raw: false,
+      };
     }
   })
   const response = await env.AI.run('@cf/deepseek-ai/deepseek-r1-distill-qwen-32b', question);
