@@ -52,15 +52,23 @@ const commitPrompt = () => {
   flex-direction: column;
   justify-content: flex-end;
 }
-.dialogues-warp{
+
+.dialogues-warp {
   display: flex;
   flex-direction: column;
+  font-size: 32px;
 }
 
 .question {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  /* 背景颜色 */
+  background-color: #f0f0f0;
+  /* 圆角半径 */
+  border-radius: 15px;
+  /* 内边距 */
+  padding: 15px;
 }
 
 .even {
@@ -80,10 +88,12 @@ const commitPrompt = () => {
 }
 
 .prompt {
+  font-size: 32px;
   width: 60vw;
 }
 
 .commit-prompt {
-  width: 30vw;
+  font-size: 32px;
+  width: 20vw;
 }
 </style>
