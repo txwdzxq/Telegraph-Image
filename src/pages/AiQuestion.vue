@@ -11,15 +11,14 @@ interface dialogue {
   content: string[];
 }
 
-const message = ref<HTMLInputElement>();
+const message = ref<HTMLTextAreaElement>();
 const window_location_origin = ref<string>(window.location.origin)
 const dialogues = ref<dialogue[]>([]);
 
 
-const commitMessage = (event: MouseEvent | KeyboardEvent) => {
-  if (event.shiftKey) return
+const commitMessage = () => {
   if (message.value) {
-    if (message.value.value === '') return
+    if (message.value.value === undefined || message.value.value === '' || message.value.value.trim() === '') return
     dialogues.value.push({id: new Date().getTime().toString(), question: true, content: [message.value.value]});
     message.value.value = '';
     dialogues.value.push({
@@ -52,7 +51,7 @@ const commitMessage = (event: MouseEvent | KeyboardEvent) => {
       </div>
     </div>
     <div class="message-warp">
-      <textarea ref="message" class="message" @keyup.enter="commitMessage"></textarea>
+      <textarea ref="message" class="message" @keydown.enter.exact.prevent="commitMessage" @keydown.shift.enter="()=>{}"></textarea>
       <button ref="commit-message" class="commit-message" @click="commitMessage">commit</button>
     </div>
   </div>
