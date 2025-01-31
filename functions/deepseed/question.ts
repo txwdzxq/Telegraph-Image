@@ -7,11 +7,12 @@ export interface Env {
 interface parameters {
   prompt?: string;
   raw?: boolean;
-  message?: messages;
+  messages?: message[];
 }
 
-interface messages {
-  messages?: [];
+interface message {
+  role?: string;
+  content?: string;
 }
 
 
@@ -28,6 +29,7 @@ export const onRequest: PagesFunction<Env> = async (context) => {
   new URL(request.url).searchParams.forEach((value, key) => {
     if (key === 'q') {
       question = {
+        messages: [{ role: "user", content: "Who is Cloudflare on github?" }],
         prompt: decodeURIComponent(atob(value)),
         raw: false,
       };
