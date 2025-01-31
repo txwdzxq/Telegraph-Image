@@ -60,7 +60,7 @@ const commitPrompt = (event: MouseEvent | KeyboardEvent) => {
 <style scoped>
 .deepseek-warp {
   display: flex;
-  min-height: 80vh;
+  min-height: 86vh;
   flex-direction: column;
   justify-content: flex-end;
 }
@@ -105,6 +105,10 @@ const commitPrompt = (event: MouseEvent | KeyboardEvent) => {
 .prompt {
   font-size: 32px;
   width: 60vw;
+  border-radius: 4px;
+  height: auto;
+  min-height: 1em;
+  max-height: 6em;
   resize: none;
 }
 
