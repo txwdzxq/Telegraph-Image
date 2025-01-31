@@ -11,16 +11,17 @@ interface dialogue {
   content: string[];
 }
 
-const prompt = ref<HTMLInputElement>();
+const message = ref<HTMLInputElement>();
 const window_location_origin = ref<string>(window.location.origin)
 const dialogues = ref<dialogue[]>([]);
 
 
-const commitPrompt = (event: MouseEvent | KeyboardEvent) => {
+const commitMessage = (event: MouseEvent | KeyboardEvent) => {
   if (event.shiftKey) return
-  if (prompt.value) {
-    if (prompt.value.value === '') return
-    dialogues.value.push({id: new Date().getTime().toString(), question: true, content: [prompt.value.value]});
+  if (message.value) {
+    if (message.value.value === '') return
+    dialogues.value.push({id: new Date().getTime().toString(), question: true, content: [message.value.value]});
+    message.value.value = '';
     dialogues.value.push({
       id: new Date().getTime().toString(),
       question: false,
@@ -28,7 +29,7 @@ const commitPrompt = (event: MouseEvent | KeyboardEvent) => {
       content: ['']
     });
 
-    query(window_location_origin.value, prompt.value?.value)
+    query(window_location_origin.value, message.value?.value)
       .then(res => {
         const response_text = res[0].response.response;
         const text_arr = response_text.split('\n');
@@ -50,9 +51,9 @@ const commitPrompt = (event: MouseEvent | KeyboardEvent) => {
         </div>
       </div>
     </div>
-    <div class="prompt-warp">
-      <textarea ref="prompt" class="prompt" @keyup.enter="commitPrompt"></textarea>
-      <button ref="commit-prompt" class="commit-prompt" @click="commitPrompt">commit</button>
+    <div class="message-warp">
+      <textarea ref="message" class="message" @keyup.enter="commitMessage"></textarea>
+      <button ref="commit-message" class="commit-message" @click="commitMessage">commit</button>
     </div>
   </div>
 </template>
@@ -96,13 +97,13 @@ const commitPrompt = (event: MouseEvent | KeyboardEvent) => {
   padding: 15px;
 }
 
-.prompt-warp {
+.message-warp {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.prompt {
+.message {
   font-size: 32px;
   width: 60vw;
   border-radius: 4px;
@@ -112,7 +113,7 @@ const commitPrompt = (event: MouseEvent | KeyboardEvent) => {
   resize: none;
 }
 
-.commit-prompt {
+.commit-message {
   font-size: 32px;
   width: 20vw;
 }
