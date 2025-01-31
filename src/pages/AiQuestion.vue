@@ -33,8 +33,6 @@ const commitMessage = () => {
         const text_arr = response_text.split('\n');
         dialogues.value.pop();
         dialogues.value.push({id: new Date().getTime().toString(), question: false, content: text_arr});
-        console.log(222);
-
       });
   }
 }
