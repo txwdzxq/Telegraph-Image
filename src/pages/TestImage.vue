@@ -49,7 +49,7 @@ const commitPrompt = () => {
 <style scoped>
 .deepseek-warp {
   display: flex;
-  height: 80vh;
+  min-height: 80vh;
   flex-direction: column;
   justify-content: flex-end;
 }
