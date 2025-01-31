@@ -63,12 +63,6 @@ const commitPrompt = () => {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  /* 背景颜色 */
-  background-color: #f0f0f0;
-  /* 圆角半径 */
-  border-radius: 15px;
-  /* 内边距 */
-  padding: 15px;
 }
 
 .even {
@@ -79,6 +73,12 @@ const commitPrompt = () => {
 
 .cell {
   display: flex;
+  /* 背景颜色 */
+  background-color: #f0f0f0;
+  /* 圆角半径 */
+  border-radius: 15px;
+  /* 内边距 */
+  padding: 15px;
 }
 
 .prompt-warp {
