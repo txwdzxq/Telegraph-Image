@@ -33,7 +33,8 @@ const commitPrompt = () => {
   <div class="deepseek-warp">
     <div class="dialogues-warp">
       <div v-for="dialogue in dialogues" class="question" :class="{even: dialogue.question}" :key="dialogue.id">
-        <div v-for="(content,index) in dialogue.content" class="cell" :key="index">
+        <div v-for="(content,index) in dialogue.content" class="cell" :class="{'even-cell': dialogue.question}"
+             :key="index">
           {{ content }}
         </div>
       </div>
@@ -73,6 +74,9 @@ const commitPrompt = () => {
 
 .cell {
   display: flex;
+}
+
+.even-cell {
   /* 背景颜色 */
   background-color: #f0f0f0;
   /* 圆角半径 */
