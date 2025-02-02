@@ -40,7 +40,7 @@ const commitMessage = () => {
 </script>
 
 <template>
-  <div class="deepseek-warp">
+  <div class="ai-warp">
     <div class="dialogues-warp">
       <div v-for="dialogue in dialogues" class="question" :class="{even: dialogue.question}" :key="dialogue.id">
         <div v-for="(content,index) in dialogue.content" class="cell" :key="index"
@@ -57,7 +57,7 @@ const commitMessage = () => {
 </template>
 
 <style scoped>
-.deepseek-warp {
+.ai-warp {
   display: flex;
   min-height: 86vh;
   flex-direction: column;
