@@ -31,9 +31,9 @@ jobs:
       run: npm run build --if-present
     - name: Deploy to girl-self-use 
       run: | 
-        git config --global user.email "${{ secrets.GIT_USER_EMAIL }}"
-        git config --global user.name "txwdzxq" 
-        git clone --single-branch --branch girl-self-use https://txwdzxq:${{secrets.GITHUB_TOKEN}}@github.com/txwdzxq/Telegraph-Image.git deploy
+        git config --global user.email "${{github.event.pusher.email}}"
+        git config --global user.name "${{ github.event.pusher.name }}" 
+        git clone --single-branch --branch girl-self-use https://${{ github.event.pusher.name }}:${{secrets.GITHUB_TOKEN}}@github.com/txwdzxq/Telegraph-Image.git deploy
         cd deploy
         cp -r ../dist/* .
         cp -r ../functions .
